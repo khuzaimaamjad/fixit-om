@@ -3,7 +3,7 @@ import { useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { MapPin, Camera, Plus, Trash2 } from "lucide-react";
 
-export const Route = createFileRoute("/_app/vendor/route")({
+export const Route = createFileRoute("/_app/vendor")({
   head: () => ({ meta: [{ title: "On-Site Route — FixIt Vendor" }] }),
   component: VendorRoute,
 });

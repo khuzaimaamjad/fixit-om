@@ -17,6 +17,7 @@ import { Route as AppEscrowRouteImport } from './routes/_app/escrow'
 import { Route as AppDisputeRouteImport } from './routes/_app/dispute'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppBidsRouteImport } from './routes/_app/bids'
+import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor.route'
 import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor.opportunities'
 import { Route as AppVendorBidRouteImport } from './routes/_app/vendor.bid'
 
@@ -59,19 +60,25 @@ const AppBidsRoute = AppBidsRouteImport.update({
   path: '/bids',
   getParentRoute: () => AppRoute,
 } as any)
-const AppVendorOpportunitiesRoute = AppVendorOpportunitiesRouteImport.update({
-  id: '/vendor/opportunities',
-  path: '/vendor/opportunities',
+const AppVendorRouteRoute = AppVendorRouteRouteImport.update({
+  id: '/vendor',
+  path: '/vendor',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVendorOpportunitiesRoute = AppVendorOpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
 const AppVendorBidRoute = AppVendorBidRouteImport.update({
-  id: '/vendor/bid',
-  path: '/vendor/bid',
-  getParentRoute: () => AppRoute,
+  id: '/bid',
+  path: '/bid',
+  getParentRoute: () => AppVendorRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/vendor': typeof AppVendorRouteRouteWithChildren
   '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
   '/dispute': typeof AppDisputeRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/vendor': typeof AppVendorRouteRouteWithChildren
   '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
   '/dispute': typeof AppDisputeRoute
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/vendor': typeof AppVendorRouteRouteWithChildren
   '/_app/bids': typeof AppBidsRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/dispute': typeof AppDisputeRoute
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/vendor'
     | '/bids'
     | '/dashboard'
     | '/dispute'
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/vendor'
     | '/bids'
     | '/dashboard'
     | '/dispute'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_app'
+    | '/_app/vendor'
     | '/_app/bids'
     | '/_app/dashboard'
     | '/_app/dispute'
@@ -205,43 +217,62 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBidsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/vendor': {
+      id: '/_app/vendor'
+      path: '/vendor'
+      fullPath: '/vendor'
+      preLoaderRoute: typeof AppVendorRouteRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/vendor/opportunities': {
       id: '/_app/vendor/opportunities'
-      path: '/vendor/opportunities'
+      path: '/opportunities'
       fullPath: '/vendor/opportunities'
       preLoaderRoute: typeof AppVendorOpportunitiesRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppVendorRouteRoute
     }
     '/_app/vendor/bid': {
       id: '/_app/vendor/bid'
-      path: '/vendor/bid'
+      path: '/bid'
       fullPath: '/vendor/bid'
       preLoaderRoute: typeof AppVendorBidRouteImport
-      parentRoute: typeof AppRoute
+      parentRoute: typeof AppVendorRouteRoute
     }
   }
 }
 
+interface AppVendorRouteRouteChildren {
+  AppVendorBidRoute: typeof AppVendorBidRoute
+  AppVendorOpportunitiesRoute: typeof AppVendorOpportunitiesRoute
+}
+
+const AppVendorRouteRouteChildren: AppVendorRouteRouteChildren = {
+  AppVendorBidRoute: AppVendorBidRoute,
+  AppVendorOpportunitiesRoute: AppVendorOpportunitiesRoute,
+}
+
+const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
+  AppVendorRouteRouteChildren,
+)
+
 interface AppRouteChildren {
+  AppVendorRouteRoute: typeof AppVendorRouteRouteWithChildren
   AppBidsRoute: typeof AppBidsRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppDisputeRoute: typeof AppDisputeRoute
   AppEscrowRoute: typeof AppEscrowRoute
   AppMaterialsRoute: typeof AppMaterialsRoute
   AppNewJobRoute: typeof AppNewJobRoute
-  AppVendorBidRoute: typeof AppVendorBidRoute
-  AppVendorOpportunitiesRoute: typeof AppVendorOpportunitiesRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppVendorRouteRoute: AppVendorRouteRouteWithChildren,
   AppBidsRoute: AppBidsRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppDisputeRoute: AppDisputeRoute,
   AppEscrowRoute: AppEscrowRoute,
   AppMaterialsRoute: AppMaterialsRoute,
   AppNewJobRoute: AppNewJobRoute,
-  AppVendorBidRoute: AppVendorBidRoute,
-  AppVendorOpportunitiesRoute: AppVendorOpportunitiesRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
