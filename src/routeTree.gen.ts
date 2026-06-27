@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppNewJobRouteImport } from './routes/_app/new-job'
 import { Route as AppMaterialsRouteImport } from './routes/_app/materials'
 import { Route as AppEscrowRouteImport } from './routes/_app/escrow'
+import { Route as AppDisputeRouteImport } from './routes/_app/dispute'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppBidsRouteImport } from './routes/_app/bids'
 
@@ -41,6 +42,11 @@ const AppEscrowRoute = AppEscrowRouteImport.update({
   path: '/escrow',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDisputeRoute = AppDisputeRouteImport.update({
+  id: '/dispute',
+  path: '/dispute',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppDashboardRoute = AppDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -56,6 +62,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
+  '/dispute': typeof AppDisputeRoute
   '/escrow': typeof AppEscrowRoute
   '/materials': typeof AppMaterialsRoute
   '/new-job': typeof AppNewJobRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
+  '/dispute': typeof AppDisputeRoute
   '/escrow': typeof AppEscrowRoute
   '/materials': typeof AppMaterialsRoute
   '/new-job': typeof AppNewJobRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   '/_app': typeof AppRouteWithChildren
   '/_app/bids': typeof AppBidsRoute
   '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/dispute': typeof AppDisputeRoute
   '/_app/escrow': typeof AppEscrowRoute
   '/_app/materials': typeof AppMaterialsRoute
   '/_app/new-job': typeof AppNewJobRoute
@@ -84,17 +93,26 @@ export interface FileRouteTypes {
     | '/'
     | '/bids'
     | '/dashboard'
+    | '/dispute'
     | '/escrow'
     | '/materials'
     | '/new-job'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bids' | '/dashboard' | '/escrow' | '/materials' | '/new-job'
+  to:
+    | '/'
+    | '/bids'
+    | '/dashboard'
+    | '/dispute'
+    | '/escrow'
+    | '/materials'
+    | '/new-job'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_app/bids'
     | '/_app/dashboard'
+    | '/_app/dispute'
     | '/_app/escrow'
     | '/_app/materials'
     | '/_app/new-job'
@@ -142,6 +160,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEscrowRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/dispute': {
+      id: '/_app/dispute'
+      path: '/dispute'
+      fullPath: '/dispute'
+      preLoaderRoute: typeof AppDisputeRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/dashboard': {
       id: '/_app/dashboard'
       path: '/dashboard'
@@ -162,6 +187,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppBidsRoute: typeof AppBidsRoute
   AppDashboardRoute: typeof AppDashboardRoute
+  AppDisputeRoute: typeof AppDisputeRoute
   AppEscrowRoute: typeof AppEscrowRoute
   AppMaterialsRoute: typeof AppMaterialsRoute
   AppNewJobRoute: typeof AppNewJobRoute
@@ -170,6 +196,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppBidsRoute: AppBidsRoute,
   AppDashboardRoute: AppDashboardRoute,
+  AppDisputeRoute: AppDisputeRoute,
   AppEscrowRoute: AppEscrowRoute,
   AppMaterialsRoute: AppMaterialsRoute,
   AppNewJobRoute: AppNewJobRoute,
