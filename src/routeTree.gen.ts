@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppNewJobRouteImport } from './routes/_app/new-job'
+import { Route as AppMaterialsRouteImport } from './routes/_app/materials'
 import { Route as AppEscrowRouteImport } from './routes/_app/escrow'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppBidsRouteImport } from './routes/_app/bids'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AppNewJobRoute = AppNewJobRouteImport.update({
   id: '/new-job',
   path: '/new-job',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMaterialsRoute = AppMaterialsRouteImport.update({
+  id: '/materials',
+  path: '/materials',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEscrowRoute = AppEscrowRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
   '/escrow': typeof AppEscrowRoute
+  '/materials': typeof AppMaterialsRoute
   '/new-job': typeof AppNewJobRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
   '/escrow': typeof AppEscrowRoute
+  '/materials': typeof AppMaterialsRoute
   '/new-job': typeof AppNewJobRoute
 }
 export interface FileRoutesById {
@@ -67,13 +75,20 @@ export interface FileRoutesById {
   '/_app/bids': typeof AppBidsRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/escrow': typeof AppEscrowRoute
+  '/_app/materials': typeof AppMaterialsRoute
   '/_app/new-job': typeof AppNewJobRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bids' | '/dashboard' | '/escrow' | '/new-job'
+  fullPaths:
+    | '/'
+    | '/bids'
+    | '/dashboard'
+    | '/escrow'
+    | '/materials'
+    | '/new-job'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bids' | '/dashboard' | '/escrow' | '/new-job'
+  to: '/' | '/bids' | '/dashboard' | '/escrow' | '/materials' | '/new-job'
   id:
     | '__root__'
     | '/'
@@ -81,6 +96,7 @@ export interface FileRouteTypes {
     | '/_app/bids'
     | '/_app/dashboard'
     | '/_app/escrow'
+    | '/_app/materials'
     | '/_app/new-job'
   fileRoutesById: FileRoutesById
 }
@@ -112,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppNewJobRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/materials': {
+      id: '/_app/materials'
+      path: '/materials'
+      fullPath: '/materials'
+      preLoaderRoute: typeof AppMaterialsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/escrow': {
       id: '/_app/escrow'
       path: '/escrow'
@@ -140,6 +163,7 @@ interface AppRouteChildren {
   AppBidsRoute: typeof AppBidsRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppEscrowRoute: typeof AppEscrowRoute
+  AppMaterialsRoute: typeof AppMaterialsRoute
   AppNewJobRoute: typeof AppNewJobRoute
 }
 
@@ -147,6 +171,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppBidsRoute: AppBidsRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppEscrowRoute: AppEscrowRoute,
+  AppMaterialsRoute: AppMaterialsRoute,
   AppNewJobRoute: AppNewJobRoute,
 }
 
