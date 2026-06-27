@@ -19,6 +19,7 @@ import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
 import { Route as AppBidsRouteImport } from './routes/_app/bids'
 import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor.route'
 import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor.opportunities'
+import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor.ledger'
 import { Route as AppVendorBidRouteImport } from './routes/_app/vendor.bid'
 
 const AppRoute = AppRouteImport.update({
@@ -70,6 +71,11 @@ const AppVendorOpportunitiesRoute = AppVendorOpportunitiesRouteImport.update({
   path: '/opportunities',
   getParentRoute: () => AppVendorRouteRoute,
 } as any)
+const AppVendorLedgerRoute = AppVendorLedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
 const AppVendorBidRoute = AppVendorBidRouteImport.update({
   id: '/bid',
   path: '/bid',
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/materials': typeof AppMaterialsRoute
   '/new-job': typeof AppNewJobRoute
   '/vendor/bid': typeof AppVendorBidRoute
+  '/vendor/ledger': typeof AppVendorLedgerRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
 }
 export interface FileRoutesByTo {
@@ -98,6 +105,7 @@ export interface FileRoutesByTo {
   '/materials': typeof AppMaterialsRoute
   '/new-job': typeof AppNewJobRoute
   '/vendor/bid': typeof AppVendorBidRoute
+  '/vendor/ledger': typeof AppVendorLedgerRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
 }
 export interface FileRoutesById {
@@ -112,6 +120,7 @@ export interface FileRoutesById {
   '/_app/materials': typeof AppMaterialsRoute
   '/_app/new-job': typeof AppNewJobRoute
   '/_app/vendor/bid': typeof AppVendorBidRoute
+  '/_app/vendor/ledger': typeof AppVendorLedgerRoute
   '/_app/vendor/opportunities': typeof AppVendorOpportunitiesRoute
 }
 export interface FileRouteTypes {
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/materials'
     | '/new-job'
     | '/vendor/bid'
+    | '/vendor/ledger'
     | '/vendor/opportunities'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/materials'
     | '/new-job'
     | '/vendor/bid'
+    | '/vendor/ledger'
     | '/vendor/opportunities'
   id:
     | '__root__'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/_app/materials'
     | '/_app/new-job'
     | '/_app/vendor/bid'
+    | '/_app/vendor/ledger'
     | '/_app/vendor/opportunities'
   fileRoutesById: FileRoutesById
 }
@@ -231,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVendorOpportunitiesRouteImport
       parentRoute: typeof AppVendorRouteRoute
     }
+    '/_app/vendor/ledger': {
+      id: '/_app/vendor/ledger'
+      path: '/ledger'
+      fullPath: '/vendor/ledger'
+      preLoaderRoute: typeof AppVendorLedgerRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
     '/_app/vendor/bid': {
       id: '/_app/vendor/bid'
       path: '/bid'
@@ -243,11 +262,13 @@ declare module '@tanstack/react-router' {
 
 interface AppVendorRouteRouteChildren {
   AppVendorBidRoute: typeof AppVendorBidRoute
+  AppVendorLedgerRoute: typeof AppVendorLedgerRoute
   AppVendorOpportunitiesRoute: typeof AppVendorOpportunitiesRoute
 }
 
 const AppVendorRouteRouteChildren: AppVendorRouteRouteChildren = {
   AppVendorBidRoute: AppVendorBidRoute,
+  AppVendorLedgerRoute: AppVendorLedgerRoute,
   AppVendorOpportunitiesRoute: AppVendorOpportunitiesRoute,
 }
 
