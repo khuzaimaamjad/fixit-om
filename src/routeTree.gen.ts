@@ -13,6 +13,7 @@ import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppNewJobRouteImport } from './routes/_app/new-job'
 import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppBidsRouteImport } from './routes/_app/bids'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -33,14 +34,21 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppBidsRoute = AppBidsRouteImport.update({
+  id: '/bids',
+  path: '/bids',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
   '/new-job': typeof AppNewJobRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bids': typeof AppBidsRoute
   '/dashboard': typeof AppDashboardRoute
   '/new-job': typeof AppNewJobRoute
 }
@@ -48,15 +56,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
+  '/_app/bids': typeof AppBidsRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/new-job': typeof AppNewJobRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/new-job'
+  fullPaths: '/' | '/bids' | '/dashboard' | '/new-job'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/new-job'
-  id: '__root__' | '/' | '/_app' | '/_app/dashboard' | '/_app/new-job'
+  to: '/' | '/bids' | '/dashboard' | '/new-job'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/bids'
+    | '/_app/dashboard'
+    | '/_app/new-job'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,15 +109,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/bids': {
+      id: '/_app/bids'
+      path: '/bids'
+      fullPath: '/bids'
+      preLoaderRoute: typeof AppBidsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppBidsRoute: typeof AppBidsRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppNewJobRoute: typeof AppNewJobRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppBidsRoute: AppBidsRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppNewJobRoute: AppNewJobRoute,
 }
