@@ -9,38 +9,177 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppNewJobRouteImport } from './routes/_app/new-job'
+import { Route as AppMaterialsRouteImport } from './routes/_app/materials'
+import { Route as AppEscrowRouteImport } from './routes/_app/escrow'
+import { Route as AppDisputeRouteImport } from './routes/_app/dispute'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppBidsRouteImport } from './routes/_app/bids'
+import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor.route'
+import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor.opportunities'
+import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor.ledger'
+import { Route as AppVendorBidRouteImport } from './routes/_app/vendor.bid'
 
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppNewJobRoute = AppNewJobRouteImport.update({
+  id: '/new-job',
+  path: '/new-job',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMaterialsRoute = AppMaterialsRouteImport.update({
+  id: '/materials',
+  path: '/materials',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEscrowRoute = AppEscrowRouteImport.update({
+  id: '/escrow',
+  path: '/escrow',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDisputeRoute = AppDisputeRouteImport.update({
+  id: '/dispute',
+  path: '/dispute',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBidsRoute = AppBidsRouteImport.update({
+  id: '/bids',
+  path: '/bids',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVendorRouteRoute = AppVendorRouteRouteImport.update({
+  id: '/vendor',
+  path: '/vendor',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVendorOpportunitiesRoute = AppVendorOpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorLedgerRoute = AppVendorLedgerRouteImport.update({
+  id: '/ledger',
+  path: '/ledger',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorBidRoute = AppVendorBidRouteImport.update({
+  id: '/bid',
+  path: '/bid',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/vendor': typeof AppVendorRouteRouteWithChildren
+  '/bids': typeof AppBidsRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/dispute': typeof AppDisputeRoute
+  '/escrow': typeof AppEscrowRoute
+  '/materials': typeof AppMaterialsRoute
+  '/new-job': typeof AppNewJobRoute
+  '/vendor/bid': typeof AppVendorBidRoute
+  '/vendor/ledger': typeof AppVendorLedgerRoute
+  '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/vendor': typeof AppVendorRouteRouteWithChildren
+  '/bids': typeof AppBidsRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/dispute': typeof AppDisputeRoute
+  '/escrow': typeof AppEscrowRoute
+  '/materials': typeof AppMaterialsRoute
+  '/new-job': typeof AppNewJobRoute
+  '/vendor/bid': typeof AppVendorBidRoute
+  '/vendor/ledger': typeof AppVendorLedgerRoute
+  '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/_app/vendor': typeof AppVendorRouteRouteWithChildren
+  '/_app/bids': typeof AppBidsRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/dispute': typeof AppDisputeRoute
+  '/_app/escrow': typeof AppEscrowRoute
+  '/_app/materials': typeof AppMaterialsRoute
+  '/_app/new-job': typeof AppNewJobRoute
+  '/_app/vendor/bid': typeof AppVendorBidRoute
+  '/_app/vendor/ledger': typeof AppVendorLedgerRoute
+  '/_app/vendor/opportunities': typeof AppVendorOpportunitiesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/vendor'
+    | '/bids'
+    | '/dashboard'
+    | '/dispute'
+    | '/escrow'
+    | '/materials'
+    | '/new-job'
+    | '/vendor/bid'
+    | '/vendor/ledger'
+    | '/vendor/opportunities'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/vendor'
+    | '/bids'
+    | '/dashboard'
+    | '/dispute'
+    | '/escrow'
+    | '/materials'
+    | '/new-job'
+    | '/vendor/bid'
+    | '/vendor/ledger'
+    | '/vendor/opportunities'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/_app/vendor'
+    | '/_app/bids'
+    | '/_app/dashboard'
+    | '/_app/dispute'
+    | '/_app/escrow'
+    | '/_app/materials'
+    | '/_app/new-job'
+    | '/_app/vendor/bid'
+    | '/_app/vendor/ledger'
+    | '/_app/vendor/opportunities'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +187,121 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/new-job': {
+      id: '/_app/new-job'
+      path: '/new-job'
+      fullPath: '/new-job'
+      preLoaderRoute: typeof AppNewJobRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/materials': {
+      id: '/_app/materials'
+      path: '/materials'
+      fullPath: '/materials'
+      preLoaderRoute: typeof AppMaterialsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/escrow': {
+      id: '/_app/escrow'
+      path: '/escrow'
+      fullPath: '/escrow'
+      preLoaderRoute: typeof AppEscrowRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dispute': {
+      id: '/_app/dispute'
+      path: '/dispute'
+      fullPath: '/dispute'
+      preLoaderRoute: typeof AppDisputeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/bids': {
+      id: '/_app/bids'
+      path: '/bids'
+      fullPath: '/bids'
+      preLoaderRoute: typeof AppBidsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/vendor': {
+      id: '/_app/vendor'
+      path: '/vendor'
+      fullPath: '/vendor'
+      preLoaderRoute: typeof AppVendorRouteRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/vendor/opportunities': {
+      id: '/_app/vendor/opportunities'
+      path: '/opportunities'
+      fullPath: '/vendor/opportunities'
+      preLoaderRoute: typeof AppVendorOpportunitiesRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/ledger': {
+      id: '/_app/vendor/ledger'
+      path: '/ledger'
+      fullPath: '/vendor/ledger'
+      preLoaderRoute: typeof AppVendorLedgerRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/bid': {
+      id: '/_app/vendor/bid'
+      path: '/bid'
+      fullPath: '/vendor/bid'
+      preLoaderRoute: typeof AppVendorBidRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
   }
 }
 
+interface AppVendorRouteRouteChildren {
+  AppVendorBidRoute: typeof AppVendorBidRoute
+  AppVendorLedgerRoute: typeof AppVendorLedgerRoute
+  AppVendorOpportunitiesRoute: typeof AppVendorOpportunitiesRoute
+}
+
+const AppVendorRouteRouteChildren: AppVendorRouteRouteChildren = {
+  AppVendorBidRoute: AppVendorBidRoute,
+  AppVendorLedgerRoute: AppVendorLedgerRoute,
+  AppVendorOpportunitiesRoute: AppVendorOpportunitiesRoute,
+}
+
+const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
+  AppVendorRouteRouteChildren,
+)
+
+interface AppRouteChildren {
+  AppVendorRouteRoute: typeof AppVendorRouteRouteWithChildren
+  AppBidsRoute: typeof AppBidsRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppDisputeRoute: typeof AppDisputeRoute
+  AppEscrowRoute: typeof AppEscrowRoute
+  AppMaterialsRoute: typeof AppMaterialsRoute
+  AppNewJobRoute: typeof AppNewJobRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppVendorRouteRoute: AppVendorRouteRouteWithChildren,
+  AppBidsRoute: AppBidsRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppDisputeRoute: AppDisputeRoute,
+  AppEscrowRoute: AppEscrowRoute,
+  AppMaterialsRoute: AppMaterialsRoute,
+  AppNewJobRoute: AppNewJobRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
