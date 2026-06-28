@@ -3,6 +3,7 @@ import { LOGO_URL, useApp } from "@/context/AppContext";
 import {
   LayoutDashboard, Sparkles, Gavel, ShieldCheck, Receipt, AlertTriangle,
   Inbox, SlidersHorizontal, MapPin, Wallet, LogOut, Menu, X,
+  Store, Recycle, Stethoscope, Ticket, Crown, Hammer, BadgeCheck, Radio, CheckSquare,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -16,10 +17,16 @@ const consumerNav = [
 ] as const;
 
 const vendorNav = [
-  { to: "/vendor/opportunities", label: "Opportunities", icon: Inbox },
-  { to: "/vendor/bid", label: "Submit Bid", icon: SlidersHorizontal },
-  { to: "/vendor/route", label: "On-Site Route", icon: MapPin },
-  { to: "/vendor/ledger", label: "Capital Ledger", icon: Wallet },
+  { to: "/vendor/opportunities", label: "Opportunities",    icon: Inbox },
+  { to: "/vendor/bid",           label: "Submit Bid",       icon: SlidersHorizontal },
+  { to: "/vendor/route",         label: "On-Site Route",    icon: MapPin },
+  { to: "/vendor/parts",         label: "Parts Logger",     icon: Receipt },
+  { to: "/vendor/ledger",        label: "Capital Ledger",   icon: Wallet },
+  { to: "/vendor/warranty",      label: "Warranty Claims",  icon: ShieldCheck },
+  { to: "/vendor/skills",        label: "Skill Tags",       icon: BadgeCheck },
+  { to: "/vendor/workshop",      label: "Workshop Intake",  icon: Hammer },
+  { to: "/vendor/marketplace",   label: "Sell on FixIt",    icon: Store },
+  { to: "/vendor/pro",           label: "FixIt Pro",        icon: Crown },
 ] as const;
 
 export default function AppShell() {
@@ -107,7 +114,7 @@ export default function AppShell() {
           <nav className="space-y-1">
             {nav.map((item) => {
               const Icon = item.icon;
-              const active = loc.pathname === item.to || (item.to !== "/dashboard" && loc.pathname.startsWith(item.to));
+              const active = loc.pathname === item.to || (item.to !== "/consumer/dashboard" && item.to !== "/vendor/opportunities" && loc.pathname.startsWith(item.to));
               return (
                 <Link
                   key={item.to}
