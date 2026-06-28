@@ -15,6 +15,7 @@ import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor/route'
 import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor/opportunities'
 import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor/ledger'
 import { Route as AppVendorBidRouteImport } from './routes/_app/vendor/bid'
+import { Route as AppConsumerWalletRouteImport } from './routes/_app/consumer/wallet'
 import { Route as AppConsumerNewJobRouteImport } from './routes/_app/consumer/new-job'
 import { Route as AppConsumerMaterialsRouteImport } from './routes/_app/consumer/materials'
 import { Route as AppConsumerEscrowRouteImport } from './routes/_app/consumer/escrow'
@@ -50,6 +51,11 @@ const AppVendorBidRoute = AppVendorBidRouteImport.update({
   id: '/bid',
   path: '/bid',
   getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppConsumerWalletRoute = AppConsumerWalletRouteImport.update({
+  id: '/consumer/wallet',
+  path: '/consumer/wallet',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppConsumerNewJobRoute = AppConsumerNewJobRouteImport.update({
   id: '/consumer/new-job',
@@ -91,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/consumer/escrow': typeof AppConsumerEscrowRoute
   '/consumer/materials': typeof AppConsumerMaterialsRoute
   '/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
@@ -104,6 +111,7 @@ export interface FileRoutesByTo {
   '/consumer/escrow': typeof AppConsumerEscrowRoute
   '/consumer/materials': typeof AppConsumerMaterialsRoute
   '/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
@@ -119,6 +127,7 @@ export interface FileRoutesById {
   '/_app/consumer/escrow': typeof AppConsumerEscrowRoute
   '/_app/consumer/materials': typeof AppConsumerMaterialsRoute
   '/_app/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/_app/consumer/wallet': typeof AppConsumerWalletRoute
   '/_app/vendor/bid': typeof AppVendorBidRoute
   '/_app/vendor/ledger': typeof AppVendorLedgerRoute
   '/_app/vendor/opportunities': typeof AppVendorOpportunitiesRoute
@@ -134,6 +143,7 @@ export interface FileRouteTypes {
     | '/consumer/escrow'
     | '/consumer/materials'
     | '/consumer/new-job'
+    | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
     | '/vendor/opportunities'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/consumer/escrow'
     | '/consumer/materials'
     | '/consumer/new-job'
+    | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
     | '/vendor/opportunities'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/_app/consumer/escrow'
     | '/_app/consumer/materials'
     | '/_app/consumer/new-job'
+    | '/_app/consumer/wallet'
     | '/_app/vendor/bid'
     | '/_app/vendor/ledger'
     | '/_app/vendor/opportunities'
@@ -214,6 +226,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/vendor/bid'
       preLoaderRoute: typeof AppVendorBidRouteImport
       parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/consumer/wallet': {
+      id: '/_app/consumer/wallet'
+      path: '/consumer/wallet'
+      fullPath: '/consumer/wallet'
+      preLoaderRoute: typeof AppConsumerWalletRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/consumer/new-job': {
       id: '/_app/consumer/new-job'
@@ -284,6 +303,7 @@ interface AppRouteChildren {
   AppConsumerEscrowRoute: typeof AppConsumerEscrowRoute
   AppConsumerMaterialsRoute: typeof AppConsumerMaterialsRoute
   AppConsumerNewJobRoute: typeof AppConsumerNewJobRoute
+  AppConsumerWalletRoute: typeof AppConsumerWalletRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -294,6 +314,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppConsumerEscrowRoute: AppConsumerEscrowRoute,
   AppConsumerMaterialsRoute: AppConsumerMaterialsRoute,
   AppConsumerNewJobRoute: AppConsumerNewJobRoute,
+  AppConsumerWalletRoute: AppConsumerWalletRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
