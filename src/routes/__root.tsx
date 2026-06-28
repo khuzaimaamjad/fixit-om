@@ -81,11 +81,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "FixIt — Oman's Trusted Home Services Marketplace" },
       { name: "description", content: "Escrow-secured reverse-auction marketplace connecting Omani households with verified service providers." },
       { name: "author", content: "FixIt" },
-      { property: "og:title", content: "FixIt — Trusted Home Services in Oman" },
-      { property: "og:description", content: "Post jobs, receive blind bids, and pay safely via escrow. Built for Oman." },
+      { property: "og:title", content: "FixIt — Oman's Trusted Home Services Marketplace" },
+      { property: "og:description", content: "Escrow-secured reverse-auction marketplace connecting Omani households with verified service providers." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "FixIt — Oman's Trusted Home Services Marketplace" },
+      { name: "twitter:description", content: "Escrow-secured reverse-auction marketplace connecting Omani households with verified service providers." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/64f50caf-5293-4ef7-8e32-52d50c3a33d6" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/64f50caf-5293-4ef7-8e32-52d50c3a33d6" },
     ],
     links: [
       {
