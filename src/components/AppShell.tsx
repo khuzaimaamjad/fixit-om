@@ -41,7 +41,7 @@ export default function AppShell() {
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-          <Link to="/dashboard" className="flex min-w-0 items-center gap-2">
+          <Link to="/consumer/dashboard" className="flex min-w-0 items-center gap-2">
             <img src={LOGO_URL} alt="FixIt" className="h-9 w-9 shrink-0" />
             <span className="truncate text-xl font-black tracking-tight text-[var(--navy)]">FixIt</span>
             <span className="ml-1 hidden rounded-md bg-[var(--offwhite)] px-2 py-0.5 text-[10px] font-bold tracking-wide text-[var(--azure)] sm:inline">
