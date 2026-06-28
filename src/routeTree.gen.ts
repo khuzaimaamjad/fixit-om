@@ -12,7 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor/route'
+import { Route as AppVendorWorkshopRouteImport } from './routes/_app/vendor/workshop'
+import { Route as AppVendorWarrantyRouteImport } from './routes/_app/vendor/warranty'
+import { Route as AppVendorSkillsRouteImport } from './routes/_app/vendor/skills'
+import { Route as AppVendorProRouteImport } from './routes/_app/vendor/pro'
+import { Route as AppVendorPartsRouteImport } from './routes/_app/vendor/parts'
 import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor/opportunities'
+import { Route as AppVendorMarketplaceRouteImport } from './routes/_app/vendor/marketplace'
 import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor/ledger'
 import { Route as AppVendorBidRouteImport } from './routes/_app/vendor/bid'
 import { Route as AppConsumerWalletRouteImport } from './routes/_app/consumer/wallet'
@@ -44,9 +50,39 @@ const AppVendorRouteRoute = AppVendorRouteRouteImport.update({
   path: '/vendor',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVendorWorkshopRoute = AppVendorWorkshopRouteImport.update({
+  id: '/workshop',
+  path: '/workshop',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorWarrantyRoute = AppVendorWarrantyRouteImport.update({
+  id: '/warranty',
+  path: '/warranty',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorSkillsRoute = AppVendorSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorProRoute = AppVendorProRouteImport.update({
+  id: '/pro',
+  path: '/pro',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorPartsRoute = AppVendorPartsRouteImport.update({
+  id: '/parts',
+  path: '/parts',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
 const AppVendorOpportunitiesRoute = AppVendorOpportunitiesRouteImport.update({
   id: '/opportunities',
   path: '/opportunities',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorMarketplaceRoute = AppVendorMarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
   getParentRoute: () => AppVendorRouteRoute,
 } as any)
 const AppVendorLedgerRoute = AppVendorLedgerRouteImport.update({
@@ -149,7 +185,13 @@ export interface FileRoutesByFullPath {
   '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
+  '/vendor/marketplace': typeof AppVendorMarketplaceRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
+  '/vendor/parts': typeof AppVendorPartsRoute
+  '/vendor/pro': typeof AppVendorProRoute
+  '/vendor/skills': typeof AppVendorSkillsRoute
+  '/vendor/warranty': typeof AppVendorWarrantyRoute
+  '/vendor/workshop': typeof AppVendorWorkshopRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -170,7 +212,13 @@ export interface FileRoutesByTo {
   '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
+  '/vendor/marketplace': typeof AppVendorMarketplaceRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
+  '/vendor/parts': typeof AppVendorPartsRoute
+  '/vendor/pro': typeof AppVendorProRoute
+  '/vendor/skills': typeof AppVendorSkillsRoute
+  '/vendor/warranty': typeof AppVendorWarrantyRoute
+  '/vendor/workshop': typeof AppVendorWorkshopRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -193,7 +241,13 @@ export interface FileRoutesById {
   '/_app/consumer/wallet': typeof AppConsumerWalletRoute
   '/_app/vendor/bid': typeof AppVendorBidRoute
   '/_app/vendor/ledger': typeof AppVendorLedgerRoute
+  '/_app/vendor/marketplace': typeof AppVendorMarketplaceRoute
   '/_app/vendor/opportunities': typeof AppVendorOpportunitiesRoute
+  '/_app/vendor/parts': typeof AppVendorPartsRoute
+  '/_app/vendor/pro': typeof AppVendorProRoute
+  '/_app/vendor/skills': typeof AppVendorSkillsRoute
+  '/_app/vendor/warranty': typeof AppVendorWarrantyRoute
+  '/_app/vendor/workshop': typeof AppVendorWorkshopRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -216,7 +270,13 @@ export interface FileRouteTypes {
     | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
+    | '/vendor/marketplace'
     | '/vendor/opportunities'
+    | '/vendor/parts'
+    | '/vendor/pro'
+    | '/vendor/skills'
+    | '/vendor/warranty'
+    | '/vendor/workshop'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -237,7 +297,13 @@ export interface FileRouteTypes {
     | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
+    | '/vendor/marketplace'
     | '/vendor/opportunities'
+    | '/vendor/parts'
+    | '/vendor/pro'
+    | '/vendor/skills'
+    | '/vendor/warranty'
+    | '/vendor/workshop'
   id:
     | '__root__'
     | '/'
@@ -259,7 +325,13 @@ export interface FileRouteTypes {
     | '/_app/consumer/wallet'
     | '/_app/vendor/bid'
     | '/_app/vendor/ledger'
+    | '/_app/vendor/marketplace'
     | '/_app/vendor/opportunities'
+    | '/_app/vendor/parts'
+    | '/_app/vendor/pro'
+    | '/_app/vendor/skills'
+    | '/_app/vendor/warranty'
+    | '/_app/vendor/workshop'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -290,11 +362,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVendorRouteRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/vendor/workshop': {
+      id: '/_app/vendor/workshop'
+      path: '/workshop'
+      fullPath: '/vendor/workshop'
+      preLoaderRoute: typeof AppVendorWorkshopRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/warranty': {
+      id: '/_app/vendor/warranty'
+      path: '/warranty'
+      fullPath: '/vendor/warranty'
+      preLoaderRoute: typeof AppVendorWarrantyRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/skills': {
+      id: '/_app/vendor/skills'
+      path: '/skills'
+      fullPath: '/vendor/skills'
+      preLoaderRoute: typeof AppVendorSkillsRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/pro': {
+      id: '/_app/vendor/pro'
+      path: '/pro'
+      fullPath: '/vendor/pro'
+      preLoaderRoute: typeof AppVendorProRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/parts': {
+      id: '/_app/vendor/parts'
+      path: '/parts'
+      fullPath: '/vendor/parts'
+      preLoaderRoute: typeof AppVendorPartsRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
     '/_app/vendor/opportunities': {
       id: '/_app/vendor/opportunities'
       path: '/opportunities'
       fullPath: '/vendor/opportunities'
       preLoaderRoute: typeof AppVendorOpportunitiesRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/marketplace': {
+      id: '/_app/vendor/marketplace'
+      path: '/marketplace'
+      fullPath: '/vendor/marketplace'
+      preLoaderRoute: typeof AppVendorMarketplaceRouteImport
       parentRoute: typeof AppVendorRouteRoute
     }
     '/_app/vendor/ledger': {
@@ -415,13 +529,25 @@ declare module '@tanstack/react-router' {
 interface AppVendorRouteRouteChildren {
   AppVendorBidRoute: typeof AppVendorBidRoute
   AppVendorLedgerRoute: typeof AppVendorLedgerRoute
+  AppVendorMarketplaceRoute: typeof AppVendorMarketplaceRoute
   AppVendorOpportunitiesRoute: typeof AppVendorOpportunitiesRoute
+  AppVendorPartsRoute: typeof AppVendorPartsRoute
+  AppVendorProRoute: typeof AppVendorProRoute
+  AppVendorSkillsRoute: typeof AppVendorSkillsRoute
+  AppVendorWarrantyRoute: typeof AppVendorWarrantyRoute
+  AppVendorWorkshopRoute: typeof AppVendorWorkshopRoute
 }
 
 const AppVendorRouteRouteChildren: AppVendorRouteRouteChildren = {
   AppVendorBidRoute: AppVendorBidRoute,
   AppVendorLedgerRoute: AppVendorLedgerRoute,
+  AppVendorMarketplaceRoute: AppVendorMarketplaceRoute,
   AppVendorOpportunitiesRoute: AppVendorOpportunitiesRoute,
+  AppVendorPartsRoute: AppVendorPartsRoute,
+  AppVendorProRoute: AppVendorProRoute,
+  AppVendorSkillsRoute: AppVendorSkillsRoute,
+  AppVendorWarrantyRoute: AppVendorWarrantyRoute,
+  AppVendorWorkshopRoute: AppVendorWorkshopRoute,
 }
 
 const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
