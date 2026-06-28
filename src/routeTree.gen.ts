@@ -16,13 +16,19 @@ import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor
 import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor/ledger'
 import { Route as AppVendorBidRouteImport } from './routes/_app/vendor/bid'
 import { Route as AppConsumerWalletRouteImport } from './routes/_app/consumer/wallet'
+import { Route as AppConsumerVouchersRouteImport } from './routes/_app/consumer/vouchers'
 import { Route as AppConsumerVerifyRouteImport } from './routes/_app/consumer/verify'
+import { Route as AppConsumerPlusRouteImport } from './routes/_app/consumer/plus'
 import { Route as AppConsumerNewJobRouteImport } from './routes/_app/consumer/new-job'
 import { Route as AppConsumerMaterialsRouteImport } from './routes/_app/consumer/materials'
+import { Route as AppConsumerMarketplaceRouteImport } from './routes/_app/consumer/marketplace'
+import { Route as AppConsumerJunkRouteImport } from './routes/_app/consumer/junk'
 import { Route as AppConsumerEscrowRouteImport } from './routes/_app/consumer/escrow'
 import { Route as AppConsumerDisputeRouteImport } from './routes/_app/consumer/dispute'
+import { Route as AppConsumerDiagnosticRouteImport } from './routes/_app/consumer/diagnostic'
 import { Route as AppConsumerDashboardRouteImport } from './routes/_app/consumer/dashboard'
 import { Route as AppConsumerBidsRouteImport } from './routes/_app/consumer/bids'
+import { Route as AppConsumerAvailableNowRouteImport } from './routes/_app/consumer/available-now'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -58,9 +64,19 @@ const AppConsumerWalletRoute = AppConsumerWalletRouteImport.update({
   path: '/consumer/wallet',
   getParentRoute: () => AppRoute,
 } as any)
+const AppConsumerVouchersRoute = AppConsumerVouchersRouteImport.update({
+  id: '/consumer/vouchers',
+  path: '/consumer/vouchers',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppConsumerVerifyRoute = AppConsumerVerifyRouteImport.update({
   id: '/consumer/verify',
   path: '/consumer/verify',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerPlusRoute = AppConsumerPlusRouteImport.update({
+  id: '/consumer/plus',
+  path: '/consumer/plus',
   getParentRoute: () => AppRoute,
 } as any)
 const AppConsumerNewJobRoute = AppConsumerNewJobRouteImport.update({
@@ -73,6 +89,16 @@ const AppConsumerMaterialsRoute = AppConsumerMaterialsRouteImport.update({
   path: '/consumer/materials',
   getParentRoute: () => AppRoute,
 } as any)
+const AppConsumerMarketplaceRoute = AppConsumerMarketplaceRouteImport.update({
+  id: '/consumer/marketplace',
+  path: '/consumer/marketplace',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerJunkRoute = AppConsumerJunkRouteImport.update({
+  id: '/consumer/junk',
+  path: '/consumer/junk',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppConsumerEscrowRoute = AppConsumerEscrowRouteImport.update({
   id: '/consumer/escrow',
   path: '/consumer/escrow',
@@ -81,6 +107,11 @@ const AppConsumerEscrowRoute = AppConsumerEscrowRouteImport.update({
 const AppConsumerDisputeRoute = AppConsumerDisputeRouteImport.update({
   id: '/consumer/dispute',
   path: '/consumer/dispute',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerDiagnosticRoute = AppConsumerDiagnosticRouteImport.update({
+  id: '/consumer/diagnostic',
+  path: '/consumer/diagnostic',
   getParentRoute: () => AppRoute,
 } as any)
 const AppConsumerDashboardRoute = AppConsumerDashboardRouteImport.update({
@@ -93,17 +124,28 @@ const AppConsumerBidsRoute = AppConsumerBidsRouteImport.update({
   path: '/consumer/bids',
   getParentRoute: () => AppRoute,
 } as any)
+const AppConsumerAvailableNowRoute = AppConsumerAvailableNowRouteImport.update({
+  id: '/consumer/available-now',
+  path: '/consumer/available-now',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
+  '/consumer/available-now': typeof AppConsumerAvailableNowRoute
   '/consumer/bids': typeof AppConsumerBidsRoute
   '/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/consumer/diagnostic': typeof AppConsumerDiagnosticRoute
   '/consumer/dispute': typeof AppConsumerDisputeRoute
   '/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/consumer/junk': typeof AppConsumerJunkRoute
+  '/consumer/marketplace': typeof AppConsumerMarketplaceRoute
   '/consumer/materials': typeof AppConsumerMaterialsRoute
   '/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/consumer/plus': typeof AppConsumerPlusRoute
   '/consumer/verify': typeof AppConsumerVerifyRoute
+  '/consumer/vouchers': typeof AppConsumerVouchersRoute
   '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
@@ -112,13 +154,19 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
+  '/consumer/available-now': typeof AppConsumerAvailableNowRoute
   '/consumer/bids': typeof AppConsumerBidsRoute
   '/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/consumer/diagnostic': typeof AppConsumerDiagnosticRoute
   '/consumer/dispute': typeof AppConsumerDisputeRoute
   '/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/consumer/junk': typeof AppConsumerJunkRoute
+  '/consumer/marketplace': typeof AppConsumerMarketplaceRoute
   '/consumer/materials': typeof AppConsumerMaterialsRoute
   '/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/consumer/plus': typeof AppConsumerPlusRoute
   '/consumer/verify': typeof AppConsumerVerifyRoute
+  '/consumer/vouchers': typeof AppConsumerVouchersRoute
   '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
@@ -129,13 +177,19 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/vendor': typeof AppVendorRouteRouteWithChildren
+  '/_app/consumer/available-now': typeof AppConsumerAvailableNowRoute
   '/_app/consumer/bids': typeof AppConsumerBidsRoute
   '/_app/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/_app/consumer/diagnostic': typeof AppConsumerDiagnosticRoute
   '/_app/consumer/dispute': typeof AppConsumerDisputeRoute
   '/_app/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/_app/consumer/junk': typeof AppConsumerJunkRoute
+  '/_app/consumer/marketplace': typeof AppConsumerMarketplaceRoute
   '/_app/consumer/materials': typeof AppConsumerMaterialsRoute
   '/_app/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/_app/consumer/plus': typeof AppConsumerPlusRoute
   '/_app/consumer/verify': typeof AppConsumerVerifyRoute
+  '/_app/consumer/vouchers': typeof AppConsumerVouchersRoute
   '/_app/consumer/wallet': typeof AppConsumerWalletRoute
   '/_app/vendor/bid': typeof AppVendorBidRoute
   '/_app/vendor/ledger': typeof AppVendorLedgerRoute
@@ -146,13 +200,19 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/vendor'
+    | '/consumer/available-now'
     | '/consumer/bids'
     | '/consumer/dashboard'
+    | '/consumer/diagnostic'
     | '/consumer/dispute'
     | '/consumer/escrow'
+    | '/consumer/junk'
+    | '/consumer/marketplace'
     | '/consumer/materials'
     | '/consumer/new-job'
+    | '/consumer/plus'
     | '/consumer/verify'
+    | '/consumer/vouchers'
     | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
@@ -161,13 +221,19 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/vendor'
+    | '/consumer/available-now'
     | '/consumer/bids'
     | '/consumer/dashboard'
+    | '/consumer/diagnostic'
     | '/consumer/dispute'
     | '/consumer/escrow'
+    | '/consumer/junk'
+    | '/consumer/marketplace'
     | '/consumer/materials'
     | '/consumer/new-job'
+    | '/consumer/plus'
     | '/consumer/verify'
+    | '/consumer/vouchers'
     | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
@@ -177,13 +243,19 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/vendor'
+    | '/_app/consumer/available-now'
     | '/_app/consumer/bids'
     | '/_app/consumer/dashboard'
+    | '/_app/consumer/diagnostic'
     | '/_app/consumer/dispute'
     | '/_app/consumer/escrow'
+    | '/_app/consumer/junk'
+    | '/_app/consumer/marketplace'
     | '/_app/consumer/materials'
     | '/_app/consumer/new-job'
+    | '/_app/consumer/plus'
     | '/_app/consumer/verify'
+    | '/_app/consumer/vouchers'
     | '/_app/consumer/wallet'
     | '/_app/vendor/bid'
     | '/_app/vendor/ledger'
@@ -246,11 +318,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppConsumerWalletRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/consumer/vouchers': {
+      id: '/_app/consumer/vouchers'
+      path: '/consumer/vouchers'
+      fullPath: '/consumer/vouchers'
+      preLoaderRoute: typeof AppConsumerVouchersRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/consumer/verify': {
       id: '/_app/consumer/verify'
       path: '/consumer/verify'
       fullPath: '/consumer/verify'
       preLoaderRoute: typeof AppConsumerVerifyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/plus': {
+      id: '/_app/consumer/plus'
+      path: '/consumer/plus'
+      fullPath: '/consumer/plus'
+      preLoaderRoute: typeof AppConsumerPlusRouteImport
       parentRoute: typeof AppRoute
     }
     '/_app/consumer/new-job': {
@@ -267,6 +353,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppConsumerMaterialsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/consumer/marketplace': {
+      id: '/_app/consumer/marketplace'
+      path: '/consumer/marketplace'
+      fullPath: '/consumer/marketplace'
+      preLoaderRoute: typeof AppConsumerMarketplaceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/junk': {
+      id: '/_app/consumer/junk'
+      path: '/consumer/junk'
+      fullPath: '/consumer/junk'
+      preLoaderRoute: typeof AppConsumerJunkRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/consumer/escrow': {
       id: '/_app/consumer/escrow'
       path: '/consumer/escrow'
@@ -281,6 +381,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppConsumerDisputeRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/consumer/diagnostic': {
+      id: '/_app/consumer/diagnostic'
+      path: '/consumer/diagnostic'
+      fullPath: '/consumer/diagnostic'
+      preLoaderRoute: typeof AppConsumerDiagnosticRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/consumer/dashboard': {
       id: '/_app/consumer/dashboard'
       path: '/consumer/dashboard'
@@ -293,6 +400,13 @@ declare module '@tanstack/react-router' {
       path: '/consumer/bids'
       fullPath: '/consumer/bids'
       preLoaderRoute: typeof AppConsumerBidsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/available-now': {
+      id: '/_app/consumer/available-now'
+      path: '/consumer/available-now'
+      fullPath: '/consumer/available-now'
+      preLoaderRoute: typeof AppConsumerAvailableNowRouteImport
       parentRoute: typeof AppRoute
     }
   }
@@ -316,25 +430,37 @@ const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
 
 interface AppRouteChildren {
   AppVendorRouteRoute: typeof AppVendorRouteRouteWithChildren
+  AppConsumerAvailableNowRoute: typeof AppConsumerAvailableNowRoute
   AppConsumerBidsRoute: typeof AppConsumerBidsRoute
   AppConsumerDashboardRoute: typeof AppConsumerDashboardRoute
+  AppConsumerDiagnosticRoute: typeof AppConsumerDiagnosticRoute
   AppConsumerDisputeRoute: typeof AppConsumerDisputeRoute
   AppConsumerEscrowRoute: typeof AppConsumerEscrowRoute
+  AppConsumerJunkRoute: typeof AppConsumerJunkRoute
+  AppConsumerMarketplaceRoute: typeof AppConsumerMarketplaceRoute
   AppConsumerMaterialsRoute: typeof AppConsumerMaterialsRoute
   AppConsumerNewJobRoute: typeof AppConsumerNewJobRoute
+  AppConsumerPlusRoute: typeof AppConsumerPlusRoute
   AppConsumerVerifyRoute: typeof AppConsumerVerifyRoute
+  AppConsumerVouchersRoute: typeof AppConsumerVouchersRoute
   AppConsumerWalletRoute: typeof AppConsumerWalletRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppVendorRouteRoute: AppVendorRouteRouteWithChildren,
+  AppConsumerAvailableNowRoute: AppConsumerAvailableNowRoute,
   AppConsumerBidsRoute: AppConsumerBidsRoute,
   AppConsumerDashboardRoute: AppConsumerDashboardRoute,
+  AppConsumerDiagnosticRoute: AppConsumerDiagnosticRoute,
   AppConsumerDisputeRoute: AppConsumerDisputeRoute,
   AppConsumerEscrowRoute: AppConsumerEscrowRoute,
+  AppConsumerJunkRoute: AppConsumerJunkRoute,
+  AppConsumerMarketplaceRoute: AppConsumerMarketplaceRoute,
   AppConsumerMaterialsRoute: AppConsumerMaterialsRoute,
   AppConsumerNewJobRoute: AppConsumerNewJobRoute,
+  AppConsumerPlusRoute: AppConsumerPlusRoute,
   AppConsumerVerifyRoute: AppConsumerVerifyRoute,
+  AppConsumerVouchersRoute: AppConsumerVouchersRoute,
   AppConsumerWalletRoute: AppConsumerWalletRoute,
 }
 
