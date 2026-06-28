@@ -3,11 +3,12 @@ import { LOGO_URL, useApp } from "@/context/AppContext";
 import {
   LayoutDashboard, Sparkles, Gavel, ShieldCheck, Receipt, AlertTriangle,
   Inbox, SlidersHorizontal, MapPin, Wallet, LogOut, Menu, X,
+  Store, Recycle, Stethoscope, Ticket, Crown, Hammer, BadgeCheck, Radio, CheckSquare,
 } from "lucide-react";
 import { useState } from "react";
 
 const consumerNav = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/consumer/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/new-job", label: "Post a Job", icon: Sparkles },
   { to: "/bids", label: "Blind Bids", icon: Gavel },
   { to: "/escrow", label: "Escrow Tracking", icon: ShieldCheck },
@@ -16,10 +17,16 @@ const consumerNav = [
 ] as const;
 
 const vendorNav = [
-  { to: "/vendor/opportunities", label: "Opportunities", icon: Inbox },
-  { to: "/vendor/bid", label: "Submit Bid", icon: SlidersHorizontal },
-  { to: "/vendor/route", label: "On-Site Route", icon: MapPin },
-  { to: "/vendor/ledger", label: "Capital Ledger", icon: Wallet },
+  { to: "/vendor/opportunities", label: "Opportunities",    icon: Inbox },
+  { to: "/vendor/bid",           label: "Submit Bid",       icon: SlidersHorizontal },
+  { to: "/vendor/route",         label: "On-Site Route",    icon: MapPin },
+  { to: "/vendor/parts",         label: "Parts Logger",     icon: Receipt },
+  { to: "/vendor/ledger",        label: "Capital Ledger",   icon: Wallet },
+  { to: "/vendor/warranty",      label: "Warranty Claims",  icon: ShieldCheck },
+  { to: "/vendor/skills",        label: "Skill Tags",       icon: BadgeCheck },
+  { to: "/vendor/workshop",      label: "Workshop Intake",  icon: Hammer },
+  { to: "/vendor/marketplace",   label: "Sell on FixIt",    icon: Store },
+  { to: "/vendor/pro",           label: "FixIt Pro",        icon: Crown },
 ] as const;
 
 export default function AppShell() {
@@ -41,7 +48,7 @@ export default function AppShell() {
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
-          <Link to="/dashboard" className="flex min-w-0 items-center gap-2">
+          <Link to="/consumer/dashboard" className="flex min-w-0 items-center gap-2">
             <img src={LOGO_URL} alt="FixIt" className="h-9 w-9 shrink-0" />
             <span className="truncate text-xl font-black tracking-tight text-[var(--navy)]">FixIt</span>
             <span className="ml-1 hidden rounded-md bg-[var(--offwhite)] px-2 py-0.5 text-[10px] font-bold tracking-wide text-[var(--azure)] sm:inline">
@@ -107,7 +114,7 @@ export default function AppShell() {
           <nav className="space-y-1">
             {nav.map((item) => {
               const Icon = item.icon;
-              const active = loc.pathname === item.to || (item.to !== "/dashboard" && loc.pathname.startsWith(item.to));
+              const active = loc.pathname === item.to || (item.to !== "/consumer/dashboard" && item.to !== "/vendor/opportunities" && loc.pathname.startsWith(item.to));
               return (
                 <Link
                   key={item.to}

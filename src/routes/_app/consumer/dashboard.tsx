@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-export const Route = createFileRoute("/_app/dashboard")({
+export const Route = createFileRoute("/_app/consumer/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — FixIt Oman" },
@@ -71,7 +71,7 @@ function Dashboard() {
             className="min-w-0 flex-1 bg-transparent text-sm font-medium text-[var(--navy)] outline-none placeholder:text-muted-foreground"
           />
           <Link
-            to="/new-job"
+            to="/consumer/new-job"
             className="shrink-0 rounded-xl bg-[var(--azure)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--navy)]"
           >
             Post job
@@ -117,7 +117,7 @@ function Dashboard() {
             return (
               <Link
                 key={c.label}
-                to="/new-job"
+                to="/consumer/new-job"
                 className="group rounded-2xl border border-border bg-white p-4 text-center shadow-[var(--shadow-soft)] transition hover:-translate-y-0.5 hover:border-[var(--azure)] hover:shadow-[var(--shadow-card)]"
               >
                 <div className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-[var(--offwhite)] text-[var(--azure)] group-hover:bg-[var(--navy)] group-hover:text-white">
@@ -130,7 +130,7 @@ function Dashboard() {
         </div>
 
         <Link
-          to="/new-job"
+          to="/consumer/new-job"
           className="mt-4 grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-2xl border-2 border-dashed border-[var(--azure)]/40 bg-white p-4 hover:border-[var(--azure)]"
         >
           <div className="grid h-10 w-10 place-items-center rounded-xl bg-[var(--offwhite)] text-[var(--azure)]">

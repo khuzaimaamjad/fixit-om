@@ -67,13 +67,13 @@ function Splash() {
               />
             </div>
             <Button
-              onClick={() => { setRole(mode); navigate({ to: "/dashboard" }); }}
+              onClick={() => { setRole(mode); navigate({ to: mode === "vendor" ? "/vendor/opportunities" : "/consumer/dashboard" }); }}
               className="mt-4 h-12 w-full bg-[var(--azure)] text-base font-semibold text-white hover:bg-[var(--navy)]"
             >
               Send verification code
             </Button>
             <button
-              onClick={() => { setRole(mode); navigate({ to: "/dashboard" }); }}
+              onClick={() => { setRole(mode); navigate({ to: mode === "vendor" ? "/vendor/opportunities" : "/consumer/dashboard" }); }}
               className="mt-3 w-full text-center text-xs font-medium text-muted-foreground hover:text-[var(--azure)]"
             >
               Skip → Enter demo workspace

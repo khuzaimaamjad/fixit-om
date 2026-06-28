@@ -4,7 +4,7 @@ import { useApp } from "@/context/AppContext";
 import { useState } from "react";
 import { Camera, Wand2, ImagePlus, Lock, Target, X } from "lucide-react";
 
-export const Route = createFileRoute("/_app/new-job")({
+export const Route = createFileRoute("/_app/consumer/new-job")({
   head: () => ({ meta: [{ title: "Post a Job — FixIt" }] }),
   component: NewJob,
 });
@@ -167,7 +167,7 @@ function NewJob() {
             </div>
 
             <button
-              onClick={() => navigate({ to: "/bids" })}
+              onClick={() => navigate({ to: "/consumer/bids" })}
               className="mt-5 w-full rounded-xl bg-[var(--azure)] py-3 text-sm font-bold text-white shadow hover:bg-[var(--navy)]"
             >
               Broadcast to local vendors →

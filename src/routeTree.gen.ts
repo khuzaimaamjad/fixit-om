@@ -11,16 +11,30 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AppNewJobRouteImport } from './routes/_app/new-job'
-import { Route as AppMaterialsRouteImport } from './routes/_app/materials'
-import { Route as AppEscrowRouteImport } from './routes/_app/escrow'
-import { Route as AppDisputeRouteImport } from './routes/_app/dispute'
-import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
-import { Route as AppBidsRouteImport } from './routes/_app/bids'
-import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor.route'
-import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor.opportunities'
-import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor.ledger'
-import { Route as AppVendorBidRouteImport } from './routes/_app/vendor.bid'
+import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor/route'
+import { Route as AppVendorWorkshopRouteImport } from './routes/_app/vendor/workshop'
+import { Route as AppVendorWarrantyRouteImport } from './routes/_app/vendor/warranty'
+import { Route as AppVendorSkillsRouteImport } from './routes/_app/vendor/skills'
+import { Route as AppVendorProRouteImport } from './routes/_app/vendor/pro'
+import { Route as AppVendorPartsRouteImport } from './routes/_app/vendor/parts'
+import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor/opportunities'
+import { Route as AppVendorMarketplaceRouteImport } from './routes/_app/vendor/marketplace'
+import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor/ledger'
+import { Route as AppVendorBidRouteImport } from './routes/_app/vendor/bid'
+import { Route as AppConsumerWalletRouteImport } from './routes/_app/consumer/wallet'
+import { Route as AppConsumerVouchersRouteImport } from './routes/_app/consumer/vouchers'
+import { Route as AppConsumerVerifyRouteImport } from './routes/_app/consumer/verify'
+import { Route as AppConsumerPlusRouteImport } from './routes/_app/consumer/plus'
+import { Route as AppConsumerNewJobRouteImport } from './routes/_app/consumer/new-job'
+import { Route as AppConsumerMaterialsRouteImport } from './routes/_app/consumer/materials'
+import { Route as AppConsumerMarketplaceRouteImport } from './routes/_app/consumer/marketplace'
+import { Route as AppConsumerJunkRouteImport } from './routes/_app/consumer/junk'
+import { Route as AppConsumerEscrowRouteImport } from './routes/_app/consumer/escrow'
+import { Route as AppConsumerDisputeRouteImport } from './routes/_app/consumer/dispute'
+import { Route as AppConsumerDiagnosticRouteImport } from './routes/_app/consumer/diagnostic'
+import { Route as AppConsumerDashboardRouteImport } from './routes/_app/consumer/dashboard'
+import { Route as AppConsumerBidsRouteImport } from './routes/_app/consumer/bids'
+import { Route as AppConsumerAvailableNowRouteImport } from './routes/_app/consumer/available-now'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -31,44 +45,44 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppNewJobRoute = AppNewJobRouteImport.update({
-  id: '/new-job',
-  path: '/new-job',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppMaterialsRoute = AppMaterialsRouteImport.update({
-  id: '/materials',
-  path: '/materials',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppEscrowRoute = AppEscrowRouteImport.update({
-  id: '/escrow',
-  path: '/escrow',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppDisputeRoute = AppDisputeRouteImport.update({
-  id: '/dispute',
-  path: '/dispute',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppDashboardRoute = AppDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppBidsRoute = AppBidsRouteImport.update({
-  id: '/bids',
-  path: '/bids',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppVendorRouteRoute = AppVendorRouteRouteImport.update({
   id: '/vendor',
   path: '/vendor',
   getParentRoute: () => AppRoute,
 } as any)
+const AppVendorWorkshopRoute = AppVendorWorkshopRouteImport.update({
+  id: '/workshop',
+  path: '/workshop',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorWarrantyRoute = AppVendorWarrantyRouteImport.update({
+  id: '/warranty',
+  path: '/warranty',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorSkillsRoute = AppVendorSkillsRouteImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorProRoute = AppVendorProRouteImport.update({
+  id: '/pro',
+  path: '/pro',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorPartsRoute = AppVendorPartsRouteImport.update({
+  id: '/parts',
+  path: '/parts',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
 const AppVendorOpportunitiesRoute = AppVendorOpportunitiesRouteImport.update({
   id: '/opportunities',
   path: '/opportunities',
+  getParentRoute: () => AppVendorRouteRoute,
+} as any)
+const AppVendorMarketplaceRoute = AppVendorMarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
   getParentRoute: () => AppVendorRouteRoute,
 } as any)
 const AppVendorLedgerRoute = AppVendorLedgerRouteImport.update({
@@ -81,89 +95,243 @@ const AppVendorBidRoute = AppVendorBidRouteImport.update({
   path: '/bid',
   getParentRoute: () => AppVendorRouteRoute,
 } as any)
+const AppConsumerWalletRoute = AppConsumerWalletRouteImport.update({
+  id: '/consumer/wallet',
+  path: '/consumer/wallet',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerVouchersRoute = AppConsumerVouchersRouteImport.update({
+  id: '/consumer/vouchers',
+  path: '/consumer/vouchers',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerVerifyRoute = AppConsumerVerifyRouteImport.update({
+  id: '/consumer/verify',
+  path: '/consumer/verify',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerPlusRoute = AppConsumerPlusRouteImport.update({
+  id: '/consumer/plus',
+  path: '/consumer/plus',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerNewJobRoute = AppConsumerNewJobRouteImport.update({
+  id: '/consumer/new-job',
+  path: '/consumer/new-job',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerMaterialsRoute = AppConsumerMaterialsRouteImport.update({
+  id: '/consumer/materials',
+  path: '/consumer/materials',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerMarketplaceRoute = AppConsumerMarketplaceRouteImport.update({
+  id: '/consumer/marketplace',
+  path: '/consumer/marketplace',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerJunkRoute = AppConsumerJunkRouteImport.update({
+  id: '/consumer/junk',
+  path: '/consumer/junk',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerEscrowRoute = AppConsumerEscrowRouteImport.update({
+  id: '/consumer/escrow',
+  path: '/consumer/escrow',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerDisputeRoute = AppConsumerDisputeRouteImport.update({
+  id: '/consumer/dispute',
+  path: '/consumer/dispute',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerDiagnosticRoute = AppConsumerDiagnosticRouteImport.update({
+  id: '/consumer/diagnostic',
+  path: '/consumer/diagnostic',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerDashboardRoute = AppConsumerDashboardRouteImport.update({
+  id: '/consumer/dashboard',
+  path: '/consumer/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerBidsRoute = AppConsumerBidsRouteImport.update({
+  id: '/consumer/bids',
+  path: '/consumer/bids',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerAvailableNowRoute = AppConsumerAvailableNowRouteImport.update({
+  id: '/consumer/available-now',
+  path: '/consumer/available-now',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
-  '/bids': typeof AppBidsRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/dispute': typeof AppDisputeRoute
-  '/escrow': typeof AppEscrowRoute
-  '/materials': typeof AppMaterialsRoute
-  '/new-job': typeof AppNewJobRoute
+  '/consumer/available-now': typeof AppConsumerAvailableNowRoute
+  '/consumer/bids': typeof AppConsumerBidsRoute
+  '/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/consumer/diagnostic': typeof AppConsumerDiagnosticRoute
+  '/consumer/dispute': typeof AppConsumerDisputeRoute
+  '/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/consumer/junk': typeof AppConsumerJunkRoute
+  '/consumer/marketplace': typeof AppConsumerMarketplaceRoute
+  '/consumer/materials': typeof AppConsumerMaterialsRoute
+  '/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/consumer/plus': typeof AppConsumerPlusRoute
+  '/consumer/verify': typeof AppConsumerVerifyRoute
+  '/consumer/vouchers': typeof AppConsumerVouchersRoute
+  '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
+  '/vendor/marketplace': typeof AppVendorMarketplaceRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
+  '/vendor/parts': typeof AppVendorPartsRoute
+  '/vendor/pro': typeof AppVendorProRoute
+  '/vendor/skills': typeof AppVendorSkillsRoute
+  '/vendor/warranty': typeof AppVendorWarrantyRoute
+  '/vendor/workshop': typeof AppVendorWorkshopRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
-  '/bids': typeof AppBidsRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/dispute': typeof AppDisputeRoute
-  '/escrow': typeof AppEscrowRoute
-  '/materials': typeof AppMaterialsRoute
-  '/new-job': typeof AppNewJobRoute
+  '/consumer/available-now': typeof AppConsumerAvailableNowRoute
+  '/consumer/bids': typeof AppConsumerBidsRoute
+  '/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/consumer/diagnostic': typeof AppConsumerDiagnosticRoute
+  '/consumer/dispute': typeof AppConsumerDisputeRoute
+  '/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/consumer/junk': typeof AppConsumerJunkRoute
+  '/consumer/marketplace': typeof AppConsumerMarketplaceRoute
+  '/consumer/materials': typeof AppConsumerMaterialsRoute
+  '/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/consumer/plus': typeof AppConsumerPlusRoute
+  '/consumer/verify': typeof AppConsumerVerifyRoute
+  '/consumer/vouchers': typeof AppConsumerVouchersRoute
+  '/consumer/wallet': typeof AppConsumerWalletRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
+  '/vendor/marketplace': typeof AppVendorMarketplaceRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
+  '/vendor/parts': typeof AppVendorPartsRoute
+  '/vendor/pro': typeof AppVendorProRoute
+  '/vendor/skills': typeof AppVendorSkillsRoute
+  '/vendor/warranty': typeof AppVendorWarrantyRoute
+  '/vendor/workshop': typeof AppVendorWorkshopRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/vendor': typeof AppVendorRouteRouteWithChildren
-  '/_app/bids': typeof AppBidsRoute
-  '/_app/dashboard': typeof AppDashboardRoute
-  '/_app/dispute': typeof AppDisputeRoute
-  '/_app/escrow': typeof AppEscrowRoute
-  '/_app/materials': typeof AppMaterialsRoute
-  '/_app/new-job': typeof AppNewJobRoute
+  '/_app/consumer/available-now': typeof AppConsumerAvailableNowRoute
+  '/_app/consumer/bids': typeof AppConsumerBidsRoute
+  '/_app/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/_app/consumer/diagnostic': typeof AppConsumerDiagnosticRoute
+  '/_app/consumer/dispute': typeof AppConsumerDisputeRoute
+  '/_app/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/_app/consumer/junk': typeof AppConsumerJunkRoute
+  '/_app/consumer/marketplace': typeof AppConsumerMarketplaceRoute
+  '/_app/consumer/materials': typeof AppConsumerMaterialsRoute
+  '/_app/consumer/new-job': typeof AppConsumerNewJobRoute
+  '/_app/consumer/plus': typeof AppConsumerPlusRoute
+  '/_app/consumer/verify': typeof AppConsumerVerifyRoute
+  '/_app/consumer/vouchers': typeof AppConsumerVouchersRoute
+  '/_app/consumer/wallet': typeof AppConsumerWalletRoute
   '/_app/vendor/bid': typeof AppVendorBidRoute
   '/_app/vendor/ledger': typeof AppVendorLedgerRoute
+  '/_app/vendor/marketplace': typeof AppVendorMarketplaceRoute
   '/_app/vendor/opportunities': typeof AppVendorOpportunitiesRoute
+  '/_app/vendor/parts': typeof AppVendorPartsRoute
+  '/_app/vendor/pro': typeof AppVendorProRoute
+  '/_app/vendor/skills': typeof AppVendorSkillsRoute
+  '/_app/vendor/warranty': typeof AppVendorWarrantyRoute
+  '/_app/vendor/workshop': typeof AppVendorWorkshopRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/vendor'
-    | '/bids'
-    | '/dashboard'
-    | '/dispute'
-    | '/escrow'
-    | '/materials'
-    | '/new-job'
+    | '/consumer/available-now'
+    | '/consumer/bids'
+    | '/consumer/dashboard'
+    | '/consumer/diagnostic'
+    | '/consumer/dispute'
+    | '/consumer/escrow'
+    | '/consumer/junk'
+    | '/consumer/marketplace'
+    | '/consumer/materials'
+    | '/consumer/new-job'
+    | '/consumer/plus'
+    | '/consumer/verify'
+    | '/consumer/vouchers'
+    | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
+    | '/vendor/marketplace'
     | '/vendor/opportunities'
+    | '/vendor/parts'
+    | '/vendor/pro'
+    | '/vendor/skills'
+    | '/vendor/warranty'
+    | '/vendor/workshop'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/vendor'
-    | '/bids'
-    | '/dashboard'
-    | '/dispute'
-    | '/escrow'
-    | '/materials'
-    | '/new-job'
+    | '/consumer/available-now'
+    | '/consumer/bids'
+    | '/consumer/dashboard'
+    | '/consumer/diagnostic'
+    | '/consumer/dispute'
+    | '/consumer/escrow'
+    | '/consumer/junk'
+    | '/consumer/marketplace'
+    | '/consumer/materials'
+    | '/consumer/new-job'
+    | '/consumer/plus'
+    | '/consumer/verify'
+    | '/consumer/vouchers'
+    | '/consumer/wallet'
     | '/vendor/bid'
     | '/vendor/ledger'
+    | '/vendor/marketplace'
     | '/vendor/opportunities'
+    | '/vendor/parts'
+    | '/vendor/pro'
+    | '/vendor/skills'
+    | '/vendor/warranty'
+    | '/vendor/workshop'
   id:
     | '__root__'
     | '/'
     | '/_app'
     | '/_app/vendor'
-    | '/_app/bids'
-    | '/_app/dashboard'
-    | '/_app/dispute'
-    | '/_app/escrow'
-    | '/_app/materials'
-    | '/_app/new-job'
+    | '/_app/consumer/available-now'
+    | '/_app/consumer/bids'
+    | '/_app/consumer/dashboard'
+    | '/_app/consumer/diagnostic'
+    | '/_app/consumer/dispute'
+    | '/_app/consumer/escrow'
+    | '/_app/consumer/junk'
+    | '/_app/consumer/marketplace'
+    | '/_app/consumer/materials'
+    | '/_app/consumer/new-job'
+    | '/_app/consumer/plus'
+    | '/_app/consumer/verify'
+    | '/_app/consumer/vouchers'
+    | '/_app/consumer/wallet'
     | '/_app/vendor/bid'
     | '/_app/vendor/ledger'
+    | '/_app/vendor/marketplace'
     | '/_app/vendor/opportunities'
+    | '/_app/vendor/parts'
+    | '/_app/vendor/pro'
+    | '/_app/vendor/skills'
+    | '/_app/vendor/warranty'
+    | '/_app/vendor/workshop'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -187,48 +355,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_app/new-job': {
-      id: '/_app/new-job'
-      path: '/new-job'
-      fullPath: '/new-job'
-      preLoaderRoute: typeof AppNewJobRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/materials': {
-      id: '/_app/materials'
-      path: '/materials'
-      fullPath: '/materials'
-      preLoaderRoute: typeof AppMaterialsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/escrow': {
-      id: '/_app/escrow'
-      path: '/escrow'
-      fullPath: '/escrow'
-      preLoaderRoute: typeof AppEscrowRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/dispute': {
-      id: '/_app/dispute'
-      path: '/dispute'
-      fullPath: '/dispute'
-      preLoaderRoute: typeof AppDisputeRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/dashboard': {
-      id: '/_app/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AppDashboardRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/bids': {
-      id: '/_app/bids'
-      path: '/bids'
-      fullPath: '/bids'
-      preLoaderRoute: typeof AppBidsRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/_app/vendor': {
       id: '/_app/vendor'
       path: '/vendor'
@@ -236,11 +362,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVendorRouteRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/vendor/workshop': {
+      id: '/_app/vendor/workshop'
+      path: '/workshop'
+      fullPath: '/vendor/workshop'
+      preLoaderRoute: typeof AppVendorWorkshopRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/warranty': {
+      id: '/_app/vendor/warranty'
+      path: '/warranty'
+      fullPath: '/vendor/warranty'
+      preLoaderRoute: typeof AppVendorWarrantyRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/skills': {
+      id: '/_app/vendor/skills'
+      path: '/skills'
+      fullPath: '/vendor/skills'
+      preLoaderRoute: typeof AppVendorSkillsRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/pro': {
+      id: '/_app/vendor/pro'
+      path: '/pro'
+      fullPath: '/vendor/pro'
+      preLoaderRoute: typeof AppVendorProRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/parts': {
+      id: '/_app/vendor/parts'
+      path: '/parts'
+      fullPath: '/vendor/parts'
+      preLoaderRoute: typeof AppVendorPartsRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
     '/_app/vendor/opportunities': {
       id: '/_app/vendor/opportunities'
       path: '/opportunities'
       fullPath: '/vendor/opportunities'
       preLoaderRoute: typeof AppVendorOpportunitiesRouteImport
+      parentRoute: typeof AppVendorRouteRoute
+    }
+    '/_app/vendor/marketplace': {
+      id: '/_app/vendor/marketplace'
+      path: '/marketplace'
+      fullPath: '/vendor/marketplace'
+      preLoaderRoute: typeof AppVendorMarketplaceRouteImport
       parentRoute: typeof AppVendorRouteRoute
     }
     '/_app/vendor/ledger': {
@@ -257,19 +425,129 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVendorBidRouteImport
       parentRoute: typeof AppVendorRouteRoute
     }
+    '/_app/consumer/wallet': {
+      id: '/_app/consumer/wallet'
+      path: '/consumer/wallet'
+      fullPath: '/consumer/wallet'
+      preLoaderRoute: typeof AppConsumerWalletRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/vouchers': {
+      id: '/_app/consumer/vouchers'
+      path: '/consumer/vouchers'
+      fullPath: '/consumer/vouchers'
+      preLoaderRoute: typeof AppConsumerVouchersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/verify': {
+      id: '/_app/consumer/verify'
+      path: '/consumer/verify'
+      fullPath: '/consumer/verify'
+      preLoaderRoute: typeof AppConsumerVerifyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/plus': {
+      id: '/_app/consumer/plus'
+      path: '/consumer/plus'
+      fullPath: '/consumer/plus'
+      preLoaderRoute: typeof AppConsumerPlusRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/new-job': {
+      id: '/_app/consumer/new-job'
+      path: '/consumer/new-job'
+      fullPath: '/consumer/new-job'
+      preLoaderRoute: typeof AppConsumerNewJobRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/materials': {
+      id: '/_app/consumer/materials'
+      path: '/consumer/materials'
+      fullPath: '/consumer/materials'
+      preLoaderRoute: typeof AppConsumerMaterialsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/marketplace': {
+      id: '/_app/consumer/marketplace'
+      path: '/consumer/marketplace'
+      fullPath: '/consumer/marketplace'
+      preLoaderRoute: typeof AppConsumerMarketplaceRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/junk': {
+      id: '/_app/consumer/junk'
+      path: '/consumer/junk'
+      fullPath: '/consumer/junk'
+      preLoaderRoute: typeof AppConsumerJunkRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/escrow': {
+      id: '/_app/consumer/escrow'
+      path: '/consumer/escrow'
+      fullPath: '/consumer/escrow'
+      preLoaderRoute: typeof AppConsumerEscrowRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/dispute': {
+      id: '/_app/consumer/dispute'
+      path: '/consumer/dispute'
+      fullPath: '/consumer/dispute'
+      preLoaderRoute: typeof AppConsumerDisputeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/diagnostic': {
+      id: '/_app/consumer/diagnostic'
+      path: '/consumer/diagnostic'
+      fullPath: '/consumer/diagnostic'
+      preLoaderRoute: typeof AppConsumerDiagnosticRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/dashboard': {
+      id: '/_app/consumer/dashboard'
+      path: '/consumer/dashboard'
+      fullPath: '/consumer/dashboard'
+      preLoaderRoute: typeof AppConsumerDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/bids': {
+      id: '/_app/consumer/bids'
+      path: '/consumer/bids'
+      fullPath: '/consumer/bids'
+      preLoaderRoute: typeof AppConsumerBidsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/available-now': {
+      id: '/_app/consumer/available-now'
+      path: '/consumer/available-now'
+      fullPath: '/consumer/available-now'
+      preLoaderRoute: typeof AppConsumerAvailableNowRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppVendorRouteRouteChildren {
   AppVendorBidRoute: typeof AppVendorBidRoute
   AppVendorLedgerRoute: typeof AppVendorLedgerRoute
+  AppVendorMarketplaceRoute: typeof AppVendorMarketplaceRoute
   AppVendorOpportunitiesRoute: typeof AppVendorOpportunitiesRoute
+  AppVendorPartsRoute: typeof AppVendorPartsRoute
+  AppVendorProRoute: typeof AppVendorProRoute
+  AppVendorSkillsRoute: typeof AppVendorSkillsRoute
+  AppVendorWarrantyRoute: typeof AppVendorWarrantyRoute
+  AppVendorWorkshopRoute: typeof AppVendorWorkshopRoute
 }
 
 const AppVendorRouteRouteChildren: AppVendorRouteRouteChildren = {
   AppVendorBidRoute: AppVendorBidRoute,
   AppVendorLedgerRoute: AppVendorLedgerRoute,
+  AppVendorMarketplaceRoute: AppVendorMarketplaceRoute,
   AppVendorOpportunitiesRoute: AppVendorOpportunitiesRoute,
+  AppVendorPartsRoute: AppVendorPartsRoute,
+  AppVendorProRoute: AppVendorProRoute,
+  AppVendorSkillsRoute: AppVendorSkillsRoute,
+  AppVendorWarrantyRoute: AppVendorWarrantyRoute,
+  AppVendorWorkshopRoute: AppVendorWorkshopRoute,
 }
 
 const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
@@ -278,22 +556,38 @@ const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
 
 interface AppRouteChildren {
   AppVendorRouteRoute: typeof AppVendorRouteRouteWithChildren
-  AppBidsRoute: typeof AppBidsRoute
-  AppDashboardRoute: typeof AppDashboardRoute
-  AppDisputeRoute: typeof AppDisputeRoute
-  AppEscrowRoute: typeof AppEscrowRoute
-  AppMaterialsRoute: typeof AppMaterialsRoute
-  AppNewJobRoute: typeof AppNewJobRoute
+  AppConsumerAvailableNowRoute: typeof AppConsumerAvailableNowRoute
+  AppConsumerBidsRoute: typeof AppConsumerBidsRoute
+  AppConsumerDashboardRoute: typeof AppConsumerDashboardRoute
+  AppConsumerDiagnosticRoute: typeof AppConsumerDiagnosticRoute
+  AppConsumerDisputeRoute: typeof AppConsumerDisputeRoute
+  AppConsumerEscrowRoute: typeof AppConsumerEscrowRoute
+  AppConsumerJunkRoute: typeof AppConsumerJunkRoute
+  AppConsumerMarketplaceRoute: typeof AppConsumerMarketplaceRoute
+  AppConsumerMaterialsRoute: typeof AppConsumerMaterialsRoute
+  AppConsumerNewJobRoute: typeof AppConsumerNewJobRoute
+  AppConsumerPlusRoute: typeof AppConsumerPlusRoute
+  AppConsumerVerifyRoute: typeof AppConsumerVerifyRoute
+  AppConsumerVouchersRoute: typeof AppConsumerVouchersRoute
+  AppConsumerWalletRoute: typeof AppConsumerWalletRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppVendorRouteRoute: AppVendorRouteRouteWithChildren,
-  AppBidsRoute: AppBidsRoute,
-  AppDashboardRoute: AppDashboardRoute,
-  AppDisputeRoute: AppDisputeRoute,
-  AppEscrowRoute: AppEscrowRoute,
-  AppMaterialsRoute: AppMaterialsRoute,
-  AppNewJobRoute: AppNewJobRoute,
+  AppConsumerAvailableNowRoute: AppConsumerAvailableNowRoute,
+  AppConsumerBidsRoute: AppConsumerBidsRoute,
+  AppConsumerDashboardRoute: AppConsumerDashboardRoute,
+  AppConsumerDiagnosticRoute: AppConsumerDiagnosticRoute,
+  AppConsumerDisputeRoute: AppConsumerDisputeRoute,
+  AppConsumerEscrowRoute: AppConsumerEscrowRoute,
+  AppConsumerJunkRoute: AppConsumerJunkRoute,
+  AppConsumerMarketplaceRoute: AppConsumerMarketplaceRoute,
+  AppConsumerMaterialsRoute: AppConsumerMaterialsRoute,
+  AppConsumerNewJobRoute: AppConsumerNewJobRoute,
+  AppConsumerPlusRoute: AppConsumerPlusRoute,
+  AppConsumerVerifyRoute: AppConsumerVerifyRoute,
+  AppConsumerVouchersRoute: AppConsumerVouchersRoute,
+  AppConsumerWalletRoute: AppConsumerWalletRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
