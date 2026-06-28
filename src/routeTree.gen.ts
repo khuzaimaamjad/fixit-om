@@ -11,16 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AppNewJobRouteImport } from './routes/_app/new-job'
-import { Route as AppMaterialsRouteImport } from './routes/_app/materials'
-import { Route as AppEscrowRouteImport } from './routes/_app/escrow'
-import { Route as AppDisputeRouteImport } from './routes/_app/dispute'
-import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
-import { Route as AppBidsRouteImport } from './routes/_app/bids'
-import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor.route'
-import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor.opportunities'
-import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor.ledger'
-import { Route as AppVendorBidRouteImport } from './routes/_app/vendor.bid'
+import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor/route'
+import { Route as AppVendorOpportunitiesRouteImport } from './routes/_app/vendor/opportunities'
+import { Route as AppVendorLedgerRouteImport } from './routes/_app/vendor/ledger'
+import { Route as AppVendorBidRouteImport } from './routes/_app/vendor/bid'
+import { Route as AppConsumerNewJobRouteImport } from './routes/_app/consumer/new-job'
+import { Route as AppConsumerMaterialsRouteImport } from './routes/_app/consumer/materials'
+import { Route as AppConsumerEscrowRouteImport } from './routes/_app/consumer/escrow'
+import { Route as AppConsumerDisputeRouteImport } from './routes/_app/consumer/dispute'
+import { Route as AppConsumerDashboardRouteImport } from './routes/_app/consumer/dashboard'
+import { Route as AppConsumerBidsRouteImport } from './routes/_app/consumer/bids'
 
 const AppRoute = AppRouteImport.update({
   id: '/_app',
@@ -30,36 +30,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
-const AppNewJobRoute = AppNewJobRouteImport.update({
-  id: '/new-job',
-  path: '/new-job',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppMaterialsRoute = AppMaterialsRouteImport.update({
-  id: '/materials',
-  path: '/materials',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppEscrowRoute = AppEscrowRouteImport.update({
-  id: '/escrow',
-  path: '/escrow',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppDisputeRoute = AppDisputeRouteImport.update({
-  id: '/dispute',
-  path: '/dispute',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppDashboardRoute = AppDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppBidsRoute = AppBidsRouteImport.update({
-  id: '/bids',
-  path: '/bids',
-  getParentRoute: () => AppRoute,
 } as any)
 const AppVendorRouteRoute = AppVendorRouteRouteImport.update({
   id: '/vendor',
@@ -81,16 +51,46 @@ const AppVendorBidRoute = AppVendorBidRouteImport.update({
   path: '/bid',
   getParentRoute: () => AppVendorRouteRoute,
 } as any)
+const AppConsumerNewJobRoute = AppConsumerNewJobRouteImport.update({
+  id: '/consumer/new-job',
+  path: '/consumer/new-job',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerMaterialsRoute = AppConsumerMaterialsRouteImport.update({
+  id: '/consumer/materials',
+  path: '/consumer/materials',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerEscrowRoute = AppConsumerEscrowRouteImport.update({
+  id: '/consumer/escrow',
+  path: '/consumer/escrow',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerDisputeRoute = AppConsumerDisputeRouteImport.update({
+  id: '/consumer/dispute',
+  path: '/consumer/dispute',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerDashboardRoute = AppConsumerDashboardRouteImport.update({
+  id: '/consumer/dashboard',
+  path: '/consumer/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConsumerBidsRoute = AppConsumerBidsRouteImport.update({
+  id: '/consumer/bids',
+  path: '/consumer/bids',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
-  '/bids': typeof AppBidsRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/dispute': typeof AppDisputeRoute
-  '/escrow': typeof AppEscrowRoute
-  '/materials': typeof AppMaterialsRoute
-  '/new-job': typeof AppNewJobRoute
+  '/consumer/bids': typeof AppConsumerBidsRoute
+  '/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/consumer/dispute': typeof AppConsumerDisputeRoute
+  '/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/consumer/materials': typeof AppConsumerMaterialsRoute
+  '/consumer/new-job': typeof AppConsumerNewJobRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
@@ -98,12 +98,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
-  '/bids': typeof AppBidsRoute
-  '/dashboard': typeof AppDashboardRoute
-  '/dispute': typeof AppDisputeRoute
-  '/escrow': typeof AppEscrowRoute
-  '/materials': typeof AppMaterialsRoute
-  '/new-job': typeof AppNewJobRoute
+  '/consumer/bids': typeof AppConsumerBidsRoute
+  '/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/consumer/dispute': typeof AppConsumerDisputeRoute
+  '/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/consumer/materials': typeof AppConsumerMaterialsRoute
+  '/consumer/new-job': typeof AppConsumerNewJobRoute
   '/vendor/bid': typeof AppVendorBidRoute
   '/vendor/ledger': typeof AppVendorLedgerRoute
   '/vendor/opportunities': typeof AppVendorOpportunitiesRoute
@@ -113,12 +113,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/vendor': typeof AppVendorRouteRouteWithChildren
-  '/_app/bids': typeof AppBidsRoute
-  '/_app/dashboard': typeof AppDashboardRoute
-  '/_app/dispute': typeof AppDisputeRoute
-  '/_app/escrow': typeof AppEscrowRoute
-  '/_app/materials': typeof AppMaterialsRoute
-  '/_app/new-job': typeof AppNewJobRoute
+  '/_app/consumer/bids': typeof AppConsumerBidsRoute
+  '/_app/consumer/dashboard': typeof AppConsumerDashboardRoute
+  '/_app/consumer/dispute': typeof AppConsumerDisputeRoute
+  '/_app/consumer/escrow': typeof AppConsumerEscrowRoute
+  '/_app/consumer/materials': typeof AppConsumerMaterialsRoute
+  '/_app/consumer/new-job': typeof AppConsumerNewJobRoute
   '/_app/vendor/bid': typeof AppVendorBidRoute
   '/_app/vendor/ledger': typeof AppVendorLedgerRoute
   '/_app/vendor/opportunities': typeof AppVendorOpportunitiesRoute
@@ -128,12 +128,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/vendor'
-    | '/bids'
-    | '/dashboard'
-    | '/dispute'
-    | '/escrow'
-    | '/materials'
-    | '/new-job'
+    | '/consumer/bids'
+    | '/consumer/dashboard'
+    | '/consumer/dispute'
+    | '/consumer/escrow'
+    | '/consumer/materials'
+    | '/consumer/new-job'
     | '/vendor/bid'
     | '/vendor/ledger'
     | '/vendor/opportunities'
@@ -141,12 +141,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/vendor'
-    | '/bids'
-    | '/dashboard'
-    | '/dispute'
-    | '/escrow'
-    | '/materials'
-    | '/new-job'
+    | '/consumer/bids'
+    | '/consumer/dashboard'
+    | '/consumer/dispute'
+    | '/consumer/escrow'
+    | '/consumer/materials'
+    | '/consumer/new-job'
     | '/vendor/bid'
     | '/vendor/ledger'
     | '/vendor/opportunities'
@@ -155,12 +155,12 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/vendor'
-    | '/_app/bids'
-    | '/_app/dashboard'
-    | '/_app/dispute'
-    | '/_app/escrow'
-    | '/_app/materials'
-    | '/_app/new-job'
+    | '/_app/consumer/bids'
+    | '/_app/consumer/dashboard'
+    | '/_app/consumer/dispute'
+    | '/_app/consumer/escrow'
+    | '/_app/consumer/materials'
+    | '/_app/consumer/new-job'
     | '/_app/vendor/bid'
     | '/_app/vendor/ledger'
     | '/_app/vendor/opportunities'
@@ -186,48 +186,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
-    }
-    '/_app/new-job': {
-      id: '/_app/new-job'
-      path: '/new-job'
-      fullPath: '/new-job'
-      preLoaderRoute: typeof AppNewJobRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/materials': {
-      id: '/_app/materials'
-      path: '/materials'
-      fullPath: '/materials'
-      preLoaderRoute: typeof AppMaterialsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/escrow': {
-      id: '/_app/escrow'
-      path: '/escrow'
-      fullPath: '/escrow'
-      preLoaderRoute: typeof AppEscrowRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/dispute': {
-      id: '/_app/dispute'
-      path: '/dispute'
-      fullPath: '/dispute'
-      preLoaderRoute: typeof AppDisputeRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/dashboard': {
-      id: '/_app/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AppDashboardRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/bids': {
-      id: '/_app/bids'
-      path: '/bids'
-      fullPath: '/bids'
-      preLoaderRoute: typeof AppBidsRouteImport
-      parentRoute: typeof AppRoute
     }
     '/_app/vendor': {
       id: '/_app/vendor'
@@ -257,6 +215,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppVendorBidRouteImport
       parentRoute: typeof AppVendorRouteRoute
     }
+    '/_app/consumer/new-job': {
+      id: '/_app/consumer/new-job'
+      path: '/consumer/new-job'
+      fullPath: '/consumer/new-job'
+      preLoaderRoute: typeof AppConsumerNewJobRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/materials': {
+      id: '/_app/consumer/materials'
+      path: '/consumer/materials'
+      fullPath: '/consumer/materials'
+      preLoaderRoute: typeof AppConsumerMaterialsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/escrow': {
+      id: '/_app/consumer/escrow'
+      path: '/consumer/escrow'
+      fullPath: '/consumer/escrow'
+      preLoaderRoute: typeof AppConsumerEscrowRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/dispute': {
+      id: '/_app/consumer/dispute'
+      path: '/consumer/dispute'
+      fullPath: '/consumer/dispute'
+      preLoaderRoute: typeof AppConsumerDisputeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/dashboard': {
+      id: '/_app/consumer/dashboard'
+      path: '/consumer/dashboard'
+      fullPath: '/consumer/dashboard'
+      preLoaderRoute: typeof AppConsumerDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/consumer/bids': {
+      id: '/_app/consumer/bids'
+      path: '/consumer/bids'
+      fullPath: '/consumer/bids'
+      preLoaderRoute: typeof AppConsumerBidsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -278,22 +278,22 @@ const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
 
 interface AppRouteChildren {
   AppVendorRouteRoute: typeof AppVendorRouteRouteWithChildren
-  AppBidsRoute: typeof AppBidsRoute
-  AppDashboardRoute: typeof AppDashboardRoute
-  AppDisputeRoute: typeof AppDisputeRoute
-  AppEscrowRoute: typeof AppEscrowRoute
-  AppMaterialsRoute: typeof AppMaterialsRoute
-  AppNewJobRoute: typeof AppNewJobRoute
+  AppConsumerBidsRoute: typeof AppConsumerBidsRoute
+  AppConsumerDashboardRoute: typeof AppConsumerDashboardRoute
+  AppConsumerDisputeRoute: typeof AppConsumerDisputeRoute
+  AppConsumerEscrowRoute: typeof AppConsumerEscrowRoute
+  AppConsumerMaterialsRoute: typeof AppConsumerMaterialsRoute
+  AppConsumerNewJobRoute: typeof AppConsumerNewJobRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
   AppVendorRouteRoute: AppVendorRouteRouteWithChildren,
-  AppBidsRoute: AppBidsRoute,
-  AppDashboardRoute: AppDashboardRoute,
-  AppDisputeRoute: AppDisputeRoute,
-  AppEscrowRoute: AppEscrowRoute,
-  AppMaterialsRoute: AppMaterialsRoute,
-  AppNewJobRoute: AppNewJobRoute,
+  AppConsumerBidsRoute: AppConsumerBidsRoute,
+  AppConsumerDashboardRoute: AppConsumerDashboardRoute,
+  AppConsumerDisputeRoute: AppConsumerDisputeRoute,
+  AppConsumerEscrowRoute: AppConsumerEscrowRoute,
+  AppConsumerMaterialsRoute: AppConsumerMaterialsRoute,
+  AppConsumerNewJobRoute: AppConsumerNewJobRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

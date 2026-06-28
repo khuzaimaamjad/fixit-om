@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { useApp, type Bid } from "@/context/AppContext";
 import { Star, ShieldCheck, Eye, EyeOff, Award, Lock } from "lucide-react";
 
-export const Route = createFileRoute("/_app/bids")({
+export const Route = createFileRoute("/_app/consumer/bids")({
   head: () => ({ meta: [{ title: "Blind Bids — FixIt" }] }),
   component: Bids,
 });

@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { Receipt, Plus, Trash2 } from "lucide-react";
 
-export const Route = createFileRoute("/_app/materials")({
+export const Route = createFileRoute("/_app/consumer/materials")({
   head: () => ({ meta: [{ title: "Material Costs — FixIt" }] }),
   component: Materials,
 });

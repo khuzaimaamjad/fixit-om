@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { useApp } from "@/context/AppContext";
 import { Clock, ShieldCheck, Truck, MapPin, RotateCw, Check } from "lucide-react";
 
-export const Route = createFileRoute("/_app/escrow")({
+export const Route = createFileRoute("/_app/consumer/escrow")({
   head: () => ({ meta: [{ title: "Escrow Tracking — FixIt" }] }),
   component: Escrow,
 });

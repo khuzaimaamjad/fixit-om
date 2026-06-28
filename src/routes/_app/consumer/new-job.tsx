@@ -4,7 +4,7 @@ import { useApp } from "@/context/AppContext";
 import { useState } from "react";
 import { Camera, Wand2, ImagePlus, Lock, Target, X } from "lucide-react";
 
-export const Route = createFileRoute("/_app/new-job")({
+export const Route = createFileRoute("/_app/consumer/new-job")({
   head: () => ({ meta: [{ title: "Post a Job — FixIt" }] }),
   component: NewJob,
 });

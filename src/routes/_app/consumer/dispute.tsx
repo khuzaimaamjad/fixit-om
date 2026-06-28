@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { useState } from "react";
 import { Camera, ShieldCheck, AlertOctagon, ImageIcon } from "lucide-react";
 
-export const Route = createFileRoute("/_app/dispute")({
+export const Route = createFileRoute("/_app/consumer/dispute")({
   head: () => ({ meta: [{ title: "Resolution Center — FixIt" }] }),
   component: Dispute,
 });

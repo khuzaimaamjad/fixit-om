@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-export const Route = createFileRoute("/_app/dashboard")({
+export const Route = createFileRoute("/_app/consumer/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard — FixIt Oman" },
