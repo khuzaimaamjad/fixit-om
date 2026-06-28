@@ -33,12 +33,12 @@ function Bids() {
             FixIt Pro · Pinned
           </div>
         )}
-        {pro.map((b) => <BidCard key={b.id} bid={b} onLock={() => { lockBid(b.id); navigate({ to: "/escrow" }); }} />)}
+        {pro.map((b) => <BidCard key={b.id} bid={b} onLock={() => { lockBid(b.id); navigate({ to: "/consumer/escrow" }); }} />)}
 
         <div className="mt-4 text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
           Standard bids
         </div>
-        {std.map((b) => <BidCard key={b.id} bid={b} onLock={() => { lockBid(b.id); navigate({ to: "/escrow" }); }} />)}
+        {std.map((b) => <BidCard key={b.id} bid={b} onLock={() => { lockBid(b.id); navigate({ to: "/consumer/escrow" }); }} />)}
       </div>
     </div>
   );

@@ -167,7 +167,7 @@ function NewJob() {
             </div>
 
             <button
-              onClick={() => navigate({ to: "/bids" })}
+              onClick={() => navigate({ to: "/consumer/bids" })}
               className="mt-5 w-full rounded-xl bg-[var(--azure)] py-3 text-sm font-bold text-white shadow hover:bg-[var(--navy)]"
             >
               Broadcast to local vendors →
