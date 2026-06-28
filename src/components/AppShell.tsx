@@ -7,7 +7,7 @@ import {
 import { useState } from "react";
 
 const consumerNav = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/consumer/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/new-job", label: "Post a Job", icon: Sparkles },
   { to: "/bids", label: "Blind Bids", icon: Gavel },
   { to: "/escrow", label: "Escrow Tracking", icon: ShieldCheck },
