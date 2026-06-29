@@ -6,6 +6,8 @@ import {
   Bath, Trees, Truck, Search, Plus, Sparkles, ShieldCheck, Star,
 } from "lucide-react";
 import { useState } from "react";
+import { MotionPage, MotionStagger, MotionItem } from "@/components/MotionPage";
+import { CountUp } from "@/components/CountUp";
 
 export const Route = createFileRoute("/_app/consumer/dashboard")({
   head: () => ({
@@ -35,7 +37,7 @@ function Dashboard() {
   const [q, setQ] = useState("");
 
   return (
-    <div>
+    <MotionPage>
       <PageHeader
         eyebrow="Marhaba 👋"
         title="What needs fixing today?"
@@ -57,7 +59,7 @@ function Dashboard() {
             </h2>
           </div>
           <div className="hidden rounded-xl bg-white/10 px-3 py-2 text-xs font-semibold text-white sm:block">
-            Wallet · {walletOMR.toFixed(2)} OMR
+            Wallet · <CountUp value={walletOMR} decimals={2} suffix=" OMR" />
           </div>
         </div>
         <div className="mt-5 flex items-center gap-2 rounded-2xl bg-white p-2 shadow-[var(--shadow-soft)]">
@@ -111,23 +113,24 @@ function Dashboard() {
           <h3 className="text-lg font-black tracking-tight text-[var(--navy)]">Trade categories</h3>
           <span className="text-xs font-semibold text-muted-foreground">Showing local Oman trades</span>
         </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <MotionStagger className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {categories.map((c) => {
             const Icon = c.icon;
             return (
-              <Link
-                key={c.label}
-                to="/consumer/new-job"
-                className="group rounded-2xl border border-border bg-white p-4 text-center shadow-[var(--shadow-soft)] transition hover:-translate-y-0.5 hover:border-[var(--azure)] hover:shadow-[var(--shadow-card)]"
-              >
-                <div className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-[var(--offwhite)] text-[var(--azure)] group-hover:bg-[var(--navy)] group-hover:text-white">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <div className="mt-2 text-sm font-semibold text-[var(--navy)]">{c.label}</div>
-              </Link>
+              <MotionItem key={c.label}>
+                <Link
+                  to="/consumer/new-job"
+                  className="group block rounded-2xl border border-border bg-white p-4 text-center shadow-[var(--shadow-soft)] transition hover:-translate-y-0.5 hover:border-[var(--azure)] hover:shadow-[var(--shadow-card)]"
+                >
+                  <div className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-[var(--offwhite)] text-[var(--azure)] transition group-hover:bg-[var(--navy)] group-hover:text-white">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div className="mt-2 text-sm font-semibold text-[var(--navy)]">{c.label}</div>
+                </Link>
+              </MotionItem>
             );
           })}
-        </div>
+        </MotionStagger>
 
         <Link
           to="/consumer/new-job"
@@ -154,7 +157,7 @@ function Dashboard() {
         <StatCard icon={Star} label="Avg vendor rating" value="4.81 ★" tone="navy" />
         <StatCard icon={Sparkles} label="Bonus credit" value="+5.00 OMR" tone="azure" />
       </div>
-    </div>
+    </MotionPage>
   );
 }
 

@@ -9,6 +9,8 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import { AppProvider } from "@/context/AppContext";
+import { Toaster } from "sonner";
+import { CommandPalette } from "@/components/CommandPalette";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -126,6 +128,15 @@ function RootComponent() {
       <AppProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
+        <CommandPalette />
+        <Toaster
+          position="top-right"
+          richColors
+          closeButton
+          toastOptions={{
+            style: { fontWeight: 600 },
+          }}
+        />
       </AppProvider>
     </QueryClientProvider>
   );

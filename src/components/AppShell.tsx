@@ -4,8 +4,12 @@ import {
   LayoutDashboard, Sparkles, Gavel, ShieldCheck, Receipt, AlertTriangle,
   Inbox, SlidersHorizontal, MapPin, Wallet, LogOut, Menu, X,
   Store, Recycle, Stethoscope, Ticket, Crown, Hammer, BadgeCheck, Radio, CheckSquare,
+  Bell, Command as CommandIcon,
 } from "lucide-react";
 import { useState } from "react";
+import { BottomTabBar } from "@/components/BottomTabBar";
+import { CountUp } from "@/components/CountUp";
+import { motion, AnimatePresence } from "framer-motion";
 
 const consumerNav = [
   { to: "/consumer/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -37,7 +41,7 @@ export default function AppShell() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[var(--offwhite)] text-foreground">
+    <div className="min-h-dvh bg-[var(--offwhite)] pb-16 text-foreground lg:pb-0">
       {/* Top bar */}
       <header className="sticky top-0 z-40 border-b border-border bg-white/85 backdrop-blur">
         <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-4 px-4 sm:px-6">
@@ -57,6 +61,21 @@ export default function AppShell() {
           </Link>
 
           <div className="ml-auto flex items-center gap-3">
+            <button
+              onClick={() => { const ev = new KeyboardEvent("keydown", { key: "k", metaKey: true }); window.dispatchEvent(ev); }}
+              className="hidden items-center gap-2 rounded-lg border border-border bg-white px-2.5 py-1.5 text-[11px] font-semibold text-muted-foreground hover:border-[var(--azure)] hover:text-[var(--navy)] md:flex"
+              aria-label="Open command palette"
+            >
+              <CommandIcon className="h-3.5 w-3.5" /> Search
+              <kbd className="rounded bg-[var(--offwhite)] px-1.5 py-0.5 text-[10px] font-bold text-[var(--azure)]">⌘K</kbd>
+            </button>
+            <Link
+              to="/activity"
+              className="grid h-9 w-9 place-items-center rounded-lg border border-border bg-white text-[var(--navy)] hover:border-[var(--azure)]"
+              aria-label="Activity inbox"
+            >
+              <Bell className="h-4 w-4" />
+            </Link>
             <div className="hidden items-center gap-1 rounded-xl bg-[var(--offwhite)] p-1 sm:flex">
               {(["consumer", "vendor"] as const).map((r) => (
                 <button
@@ -74,7 +93,7 @@ export default function AppShell() {
               ))}
             </div>
             <div className="hidden rounded-lg border border-border bg-white px-3 py-1.5 text-xs font-semibold text-[var(--navy)] md:block">
-              Wallet · <span className="text-[var(--azure)]">{walletOMR.toFixed(2)} OMR</span>
+              Wallet · <span className="text-[var(--azure)]"><CountUp value={walletOMR} decimals={2} suffix=" OMR" /></span>
             </div>
             <Link to="/" className="grid h-9 w-9 place-items-center rounded-lg border border-border text-muted-foreground hover:text-[var(--navy)]" aria-label="Sign out">
               <LogOut className="h-4 w-4" />
@@ -145,10 +164,21 @@ export default function AppShell() {
         </aside>
 
         {/* Main */}
-        <main className="min-h-[calc(100vh-4rem)] flex-1 px-4 py-6 sm:px-6 lg:px-8">
-          <Outlet />
+        <main className="min-h-[calc(100dvh-4rem)] flex-1 px-4 py-6 sm:px-6 lg:px-8">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={loc.pathname}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
+      <BottomTabBar />
     </div>
   );
 }
