@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import logoAsset from "@/assets/fixit-logo.png.asset.json";
+import { toast } from "sonner";
 
 export const LOGO_URL = logoAsset.url;
 
@@ -155,21 +156,44 @@ export function AppProvider({ children }: { children: ReactNode }) {
     topUp: (n) => {
       const bonus = topUpBonus(n);
       setWallet((w) => w + n + bonus);
+      toast.success(`Wallet topped up · +${(n + bonus).toFixed(2)} OMR`, {
+        description: bonus > 0 ? `Includes +${bonus} OMR liquidity bonus.` : "Funds available immediately.",
+      });
       return { credited: n + bonus, bonus };
     },
-    spend: (n) => { if (walletOMR < n) return false; setWallet((w) => w - n); return true; },
+    spend: (n) => {
+      if (walletOMR < n) { toast.error("Insufficient wallet balance", { description: `Need ${n.toFixed(2)} OMR.` }); return false; }
+      setWallet((w) => w - n);
+      return true;
+    },
     bids,
     lockedBidId,
-    lockBid: (id) => { setLockedBidId(id); setEscrowStage(1); },
+    lockBid: (id) => {
+      setLockedBidId(id); setEscrowStage(1);
+      toast.success("Bid locked · escrow opened", { description: "Vendor identity revealed. Stage 1 of 3 begins now." });
+    },
     escrowStage,
-    advanceEscrow: () => setEscrowStage((s) => (s < 3 ? ((s + 1) as 0|1|2|3) : s)),
-    resetEscrow: () => { setEscrowStage(0); setLockedBidId(null); setVendorPhoto(false); setConsumerPhoto(false); setPartsApproved(false); setReceipts([]); },
+    advanceEscrow: () => setEscrowStage((s) => {
+      const next = (s < 3 ? ((s + 1) as 0|1|2|3) : s);
+      if (next !== s) {
+        const labels = ["", "Vendor dispatched", "On-site verified", "Released to vendor"];
+        toast.success(`Escrow → ${labels[next]}`, { description: `Milestone ${next} of 3 confirmed.` });
+      }
+      return next;
+    }),
+    resetEscrow: () => {
+      setEscrowStage(0); setLockedBidId(null); setVendorPhoto(false); setConsumerPhoto(false); setPartsApproved(false); setReceipts([]);
+      toast("Escrow reset", { description: "Job cleared from your live pipeline." });
+    },
     isPlus, setPlus, isPro, setPro,
     vendorPhoto, consumerPhoto, setVendorPhoto, setConsumerPhoto,
     vouchers,
     redeemVoucher: (raw) => {
       const code = raw.trim().toUpperCase();
-      if (!/^FIXIT-[A-Z0-9]{4}$/.test(code)) return null;
+      if (!/^FIXIT-[A-Z0-9]{4}$/.test(code)) {
+        toast.error("Invalid voucher format", { description: "Expected FIXIT-XXXX (4 alphanumeric)." });
+        return null;
+      }
       let v: Voucher;
       const tail = code.slice(-1);
       if ("0123".includes(tail))      v = { code, type: "credit", amount: 5, label: "+5 OMR wallet credit" };
@@ -178,27 +202,40 @@ export function AppProvider({ children }: { children: ReactNode }) {
       setVouchers((vs) => [v, ...vs]);
       if (v.type === "credit") setWallet((w) => w + v.amount);
       if (v.type === "plan")   setPlus(true);
+      toast.success(`Voucher applied · ${code}`, { description: v.label });
       return v;
     },
     listings,
-    placeBid: (id, amount) => setListings((ls) => ls.map((l) => l.id === id ? { ...l, topBid: Math.max(l.topBid ?? 0, amount) } : l)),
+    placeBid: (id, amount) => {
+      setListings((ls) => ls.map((l) => l.id === id ? { ...l, topBid: Math.max(l.topBid ?? 0, amount) } : l));
+      toast.success(`Bid placed · ${amount.toFixed(2)} OMR`, { description: "Sealed and held until auction close." });
+    },
     vendorWallet, lockedWarrantyPool,
     bidTokens,
-    useBidToken: () => { if (bidTokens <= 0) return false; setBidTokens((t) => t - 1); return true; },
-    refundBidToken: () => setBidTokens((t) => t + 1),
+    useBidToken: () => {
+      if (bidTokens <= 0) { toast.error("No bid tokens left", { description: "Top up your vendor pool to keep bidding." }); return false; }
+      setBidTokens((t) => t - 1);
+      toast("Bid token spent", { description: "Refundable if you win the contract." });
+      return true;
+    },
+    refundBidToken: () => { setBidTokens((t) => t + 1); toast.success("Bid token refunded"); },
     busy, setBusy,
     availableNow, setAvailableNow,
     strikes, addStrike: () => setStrikes((s) => s + 1),
     warrantyClaims,
-    resolveClaim: (id, action) => setClaims((cs) => cs.map((c) => c.id === id ? { ...c, status: action === "schedule" ? "scheduled" : "ignored" } : c)),
-    skills, addSkill: (name) => setSkills((s) => [...s, { name, status: "pending" }]),
+    resolveClaim: (id, action) => {
+      setClaims((cs) => cs.map((c) => c.id === id ? { ...c, status: action === "schedule" ? "scheduled" : "ignored" } : c));
+      if (action === "schedule") toast.success("Claim scheduled", { description: "Customer notified — 24h window opened." });
+      else { toast.warning("Claim ignored", { description: "A warranty strike has been added to your profile." }); setStrikes((s) => s + 1); }
+    },
+    skills, addSkill: (name) => { setSkills((s) => [...s, { name, status: "pending" }]); toast(`Skill added · ${name}`, { description: "Pending FixIt approval." }); },
     receipts,
-    addReceipt: (store, amount) => setReceipts((r) => [...r, { id: `r${r.length + 1}`, store, amount }]),
-    approveParts: () => setPartsApproved(true),
+    addReceipt: (store, amount) => { setReceipts((r) => [...r, { id: `r${r.length + 1}`, store, amount }]); toast(`Receipt logged · ${store}`, { description: `${amount.toFixed(2)} OMR — awaiting consumer approval.` }); },
+    approveParts: () => { setPartsApproved(true); toast.success("Parts list approved", { description: "Vendor reimbursed from escrow." }); },
     partsApproved,
     diagnosticPassActive,
-    buyDiagnosticPass: () => { setWallet((w) => Math.max(0, w - 3)); setDiag(true); },
-    releaseDiagnosticPass: () => { setDiag(false); setVendorWallet((w) => w + 1); },
+    buyDiagnosticPass: () => { setWallet((w) => Math.max(0, w - 3)); setDiag(true); toast.success("Diagnostic pass active", { description: "3 OMR locked in rolling escrow." }); },
+    releaseDiagnosticPass: () => { setDiag(false); setVendorWallet((w) => w + 1); toast.success("Pass released · vendor paid 1 OMR"); },
   }), [role, walletOMR, bids, lockedBidId, escrowStage, isPlus, isPro, vendorPhoto, consumerPhoto, vouchers, listings, vendorWallet, lockedWarrantyPool, bidTokens, busy, availableNow, strikes, warrantyClaims, skills, receipts, partsApproved, diagnosticPassActive]);
 
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;

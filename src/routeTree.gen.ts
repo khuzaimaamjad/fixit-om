@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppActivityRouteImport } from './routes/_app/activity'
 import { Route as AppVendorRouteRouteImport } from './routes/_app/vendor/route'
 import { Route as AppVendorWorkshopRouteImport } from './routes/_app/vendor/workshop'
 import { Route as AppVendorWarrantyRouteImport } from './routes/_app/vendor/warranty'
@@ -44,6 +45,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppActivityRoute = AppActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
+  getParentRoute: () => AppRoute,
 } as any)
 const AppVendorRouteRoute = AppVendorRouteRouteImport.update({
   id: '/vendor',
@@ -169,6 +175,7 @@ const AppConsumerAvailableNowRoute = AppConsumerAvailableNowRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
+  '/activity': typeof AppActivityRoute
   '/consumer/available-now': typeof AppConsumerAvailableNowRoute
   '/consumer/bids': typeof AppConsumerBidsRoute
   '/consumer/dashboard': typeof AppConsumerDashboardRoute
@@ -196,6 +203,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/vendor': typeof AppVendorRouteRouteWithChildren
+  '/activity': typeof AppActivityRoute
   '/consumer/available-now': typeof AppConsumerAvailableNowRoute
   '/consumer/bids': typeof AppConsumerBidsRoute
   '/consumer/dashboard': typeof AppConsumerDashboardRoute
@@ -225,6 +233,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_app': typeof AppRouteWithChildren
   '/_app/vendor': typeof AppVendorRouteRouteWithChildren
+  '/_app/activity': typeof AppActivityRoute
   '/_app/consumer/available-now': typeof AppConsumerAvailableNowRoute
   '/_app/consumer/bids': typeof AppConsumerBidsRoute
   '/_app/consumer/dashboard': typeof AppConsumerDashboardRoute
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/vendor'
+    | '/activity'
     | '/consumer/available-now'
     | '/consumer/bids'
     | '/consumer/dashboard'
@@ -281,6 +291,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/vendor'
+    | '/activity'
     | '/consumer/available-now'
     | '/consumer/bids'
     | '/consumer/dashboard'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_app'
     | '/_app/vendor'
+    | '/_app/activity'
     | '/_app/consumer/available-now'
     | '/_app/consumer/bids'
     | '/_app/consumer/dashboard'
@@ -354,6 +366,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/activity': {
+      id: '/_app/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof AppActivityRouteImport
+      parentRoute: typeof AppRoute
     }
     '/_app/vendor': {
       id: '/_app/vendor'
@@ -556,6 +575,7 @@ const AppVendorRouteRouteWithChildren = AppVendorRouteRoute._addFileChildren(
 
 interface AppRouteChildren {
   AppVendorRouteRoute: typeof AppVendorRouteRouteWithChildren
+  AppActivityRoute: typeof AppActivityRoute
   AppConsumerAvailableNowRoute: typeof AppConsumerAvailableNowRoute
   AppConsumerBidsRoute: typeof AppConsumerBidsRoute
   AppConsumerDashboardRoute: typeof AppConsumerDashboardRoute
@@ -574,6 +594,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppVendorRouteRoute: AppVendorRouteRouteWithChildren,
+  AppActivityRoute: AppActivityRoute,
   AppConsumerAvailableNowRoute: AppConsumerAvailableNowRoute,
   AppConsumerBidsRoute: AppConsumerBidsRoute,
   AppConsumerDashboardRoute: AppConsumerDashboardRoute,
